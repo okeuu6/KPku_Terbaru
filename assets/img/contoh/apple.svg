@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect x="6" y="6" width="188" height="188" rx="22" fill="#FEF2F2" stroke="#1E293B" stroke-width="3"/>
+  <!-- Stem -->
+  <path d="M100 60 C102 38, 114 30, 118 26 C116 34, 110 46, 104 60 Z" fill="#1E293B" stroke="#1E293B" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Leaf -->
+  <path d="M105 44 C122 30, 148 36, 144 52 C126 60, 108 48, 105 44 Z" fill="#10B981" stroke="#1E293B" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Apple Body -->
+  <path d="M100 66 C84 48, 46 54, 40 85 C32 120, 54 172, 92 176 C98 177, 102 172, 108 172 C114 172, 118 177, 124 176 C162 172, 184 120, 176 85 C170 54, 132 48, 114 66 C108 72, 104 72, 100 66 Z" fill="#EF4444" stroke="#1E293B" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- Shiny Highlight Patch -->
+  <path d="M62 76 C56 90, 58 114, 66 126" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" fill="none"/>
+</svg>

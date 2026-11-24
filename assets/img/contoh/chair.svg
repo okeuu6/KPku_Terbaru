@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect x="6" y="6" width="188" height="188" rx="22" fill="#F0FDFA" stroke="#1E293B" stroke-width="3"/>
+  <!-- Backrest -->
+  <rect x="68" y="42" width="64" height="60" rx="8" fill="#10B981" stroke="#1E293B" stroke-width="3.5"/>
+  <rect x="78" y="52" width="12" height="40" rx="4" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <rect x="110" y="52" width="12" height="40" rx="4" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+  <!-- Seat -->
+  <rect x="56" y="98" width="88" height="20" rx="6" fill="#F59E0B" stroke="#1E293B" stroke-width="3.5"/>
+  <!-- Legs -->
+  <rect x="64" y="118" width="10" height="52" rx="3" fill="#1E293B"/>
+  <rect x="126" y="118" width="10" height="52" rx="3" fill="#1E293B"/>
+  <rect x="78" y="118" width="8" height="40" rx="2" fill="#1E293B" opacity="0.6"/>
+  <rect x="114" y="118" width="8" height="40" rx="2" fill="#1E293B" opacity="0.6"/>
+  <!-- Stretcher -->
+  <line x1="64" y1="144" x2="136" y2="144" stroke="#1E293B" stroke-width="3"/>
+</svg>

@@ -1,0 +1,6 @@
+includes/config.php
+uploads/soal/*
+!uploads/soal/.htaccess
+!uploads/soal/.gitkeep
+*.log
+.DS_Store

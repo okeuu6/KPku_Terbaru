@@ -1,0 +1,13 @@
+# Prioritaskan eksekusi PHP di server Apache / XAMPP
+DirectoryIndex index.php index.html
+
+# Lindungi berkas konfigurasi dan direktori sensitif
+<FilesMatch "^(config\.php|\.gitignore|README\.md)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Pengaturan charset dan keamanan header
+AddDefaultCharset UTF-8
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"

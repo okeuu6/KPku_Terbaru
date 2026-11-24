@@ -1,0 +1,764 @@
+/* ==============================================================
+   MEDIA BELAJAR INGGRIS SD - KPKU
+   Desain Ceria, Hangat, & Taktil untuk Siswa Sekolah Dasar
+   Human-Crafted (Bukan Template AI) - Ramah Anak & Interaktif
+   ============================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root {
+  /* Palet Warna Ceria & Hangat Ramah Anak */
+  --warna-utama: #2563EB;      /* Biru Ceria: Tombol utama, header */
+  --warna-utama-d: #1D4ED8;    /* Biru gelap untuk bayangan 3D */
+  --warna-aksen: #F59E0B;      /* Kuning Mentari / Emas: Bintang, sorotan */
+  --warna-aksen-d: #D97706;    /* Emas gelap untuk bayangan 3D */
+  --warna-oranye: #FF6B4A;     /* Coral / Jingga Ceria: Aksi seru */
+  --warna-oranye-d: #E8502C;   /* Jingga gelap untuk bayangan 3D */
+  --warna-ungu: #8B5CF6;       /* Ungu Manis */
+  --warna-ungu-d: #7C3AED;     /* Ungu gelap */
+  --latar: #FFFDF7;            /* Krem kertas buku gambar - hangat di mata */
+  --permukaan: #FFFFFF;        /* Putih solid bersih */
+  --teks: #1E293B;             /* Tinta biru dongker pekat - kontras tinggi */
+  --teks-muda: #64748B;        /* Teks sekunder */
+  --garis: #E2E8F0;            /* Garis pembatas lembut */
+  --garis-tebal: #CBD5E1;      /* Garis pembatas tebal */
+  --border-komik: #1E293B;     /* Garis tepi tegas gaya kartun/komik */
+  --benar: #10B981;            /* Hijau segar jawaban betul */
+  --benar-d: #047857;          /* Bayangan hijau */
+  --salah: #EF4444;            /* Merah ramah jawaban salah */
+  --salah-d: #B91C1C;          /* Bayangan merah */
+
+  --font-keluarga: 'Fredoka', 'Nunito', 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --transisi: 120ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* { box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-keluarga);
+  background-color: var(--latar);
+  /* Pola polkadot halus gaya buku cerita anak */
+  background-image: radial-gradient(#E2E8F0 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  color: var(--teks);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--warna-utama); text-decoration: none; transition: var(--transisi); }
+a:hover { text-decoration: underline; }
+
+/* ---- TOPBAR (CERIA, TANGGUH, RAMAH ANAK) ---- */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  background: var(--warna-utama);
+  color: #FFFFFF;
+  padding: 12px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 3.5px solid var(--border-komik);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08);
+}
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: auto;
+}
+.brand-logo {
+  width: 38px;
+  height: 38px;
+  display: block;
+  filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.15));
+}
+.brand {
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+.brand-sub {
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.22);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-left: 6px;
+  display: inline-block;
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+}
+.who {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+.peran-label {
+  background: var(--warna-aksen);
+  color: #1E293B;
+  border: 2px solid var(--border-komik);
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin-left: 4px;
+  display: inline-block;
+  box-shadow: 0 2px 0 var(--border-komik);
+}
+.btn-topbar {
+  background: #FFFFFF !important;
+  color: var(--border-komik) !important;
+  border: 2.5px solid var(--border-komik) !important;
+  padding: 6px 16px !important;
+  font-size: 0.95rem !important;
+  border-radius: 12px !important;
+  box-shadow: 0 3px 0 var(--border-komik) !important;
+  font-weight: 800 !important;
+  cursor: pointer;
+  transition: transform var(--transisi), box-shadow var(--transisi) !important;
+}
+.btn-topbar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 0 var(--border-komik) !important;
+}
+.btn-topbar:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--border-komik) !important;
+}
+
+/* ---- LAYOUT STRUCTURE ---- */
+.wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: calc(100vh - 65px);
+}
+.isi {
+  flex: 1;
+  padding: 24px 16px;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+}
+.staf .isi {
+  max-width: 1140px;
+  margin: 0;
+  font-size: 16px;
+}
+.kaki {
+  text-align: center;
+  color: #64748B;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 20px 16px;
+  border-top: 2.5px solid var(--garis);
+  background: var(--permukaan);
+  margin-top: auto;
+}
+
+/* ==============================================================
+   ZONA SISWA (halaman siswa/* & portal masuk siswa)
+   - Ukuran huruf 18px+ nyaman untuk anak SD
+   - Tombol Chunky 3D Toy-Button (membal, empuk, berbunyi pop)
+   - Stiker, lencana, dan kartu bergambar ramah & hangat
+   ============================================================== */
+.siswa-zona {
+  font-size: 18px;
+}
+.siswa-zona .isi {
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* Tombol Taktil Mainan Siswa (Chunky 3D Press Button) */
+.btn-siswa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 58px;
+  font-size: 20px;
+  font-weight: 800;
+  border-radius: 18px;
+  border: 3px solid var(--border-komik);
+  background: var(--warna-utama);
+  color: #FFFFFF;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--border-komik);
+  transition: transform var(--transisi), box-shadow var(--transisi), background var(--transisi);
+  margin-bottom: 16px;
+  padding: 14px 20px;
+  user-select: none;
+  position: relative;
+}
+.btn-siswa:hover {
+  text-decoration: none;
+  background: #1D4ED8;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--border-komik);
+}
+.btn-siswa:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--border-komik);
+}
+
+.btn-siswa-aksen {
+  background: var(--warna-oranye);
+  color: #FFFFFF;
+}
+.btn-siswa-aksen:hover {
+  background: #EA580C;
+  color: #FFFFFF;
+}
+
+.btn-siswa-emas {
+  background: var(--warna-aksen);
+  color: #1E293B;
+}
+.btn-siswa-emas:hover {
+  background: #EAB308;
+  color: #1E293B;
+}
+
+.btn-siswa-hijau {
+  background: var(--benar);
+  color: #FFFFFF;
+}
+.btn-siswa-hijau:hover {
+  background: #059669;
+  color: #FFFFFF;
+}
+
+.btn-siswa-netral {
+  background: #F8FAFC;
+  color: var(--border-komik);
+}
+.btn-siswa-netral:hover {
+  background: #F1F5F9;
+  color: var(--border-komik);
+}
+
+/* Card Siswa (Buku Cerita / Lembar Aktivitas) */
+.card-siswa {
+  background: var(--permukaan);
+  border: 3.5px solid var(--border-komik);
+  border-radius: 24px;
+  padding: 26px 22px;
+  margin-bottom: 22px;
+  text-align: center;
+  box-shadow: 0 8px 0 var(--garis-tebal);
+  position: relative;
+}
+
+/* Stiker Lencana Miring Ramah Anak */
+.stiker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FEF08A;
+  color: var(--border-komik);
+  border: 2px solid var(--border-komik);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 15px;
+  font-weight: 800;
+  box-shadow: 0 3px 0 var(--border-komik);
+  transform: rotate(-2deg);
+  margin-bottom: 12px;
+}
+.stiker-badge.kanan {
+  transform: rotate(2deg);
+  background: #BFDBFE;
+}
+
+/* Box Poin Siswa (Ceria, Berbintang) */
+.poin-siswa-box {
+  background: #FFFBEB;
+  border: 3px dashed var(--warna-aksen);
+  border-radius: 20px;
+  padding: 20px 16px;
+  margin-bottom: 24px;
+  text-align: center;
+  position: relative;
+}
+.poin-siswa-angka {
+  font-size: 54px;
+  font-weight: 900;
+  color: #D97706;
+  line-height: 1.05;
+  margin: 6px 0;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.06);
+}
+
+/* Flashcard Kata Siswa */
+.kartu-kata-gambar {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  background: #F0FDF4;
+  border: 3px solid var(--border-komik);
+  border-radius: 24px;
+  margin: 14px auto 16px;
+  display: block;
+  padding: 12px;
+  box-shadow: 0 6px 0 var(--garis-tebal);
+  transition: transform var(--transisi);
+}
+.kartu-kata-gambar:hover {
+  transform: scale(1.03) rotate(-1deg);
+}
+
+.kartu-kata-inggris {
+  font-size: 46px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--warna-utama);
+  margin: 8px 0 2px;
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+  text-shadow: 0 2px 0 rgba(37, 99, 235, 0.1);
+}
+.kartu-kata-arti {
+  font-size: 24px;
+  font-weight: 700;
+  color: #475569;
+  margin: 0 0 20px;
+}
+
+/* Navigasi Kartu Sebelumnya / Berikutnya */
+.nav-kartu-siswa {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+.nav-kartu-siswa .btn-siswa {
+  margin-bottom: 0;
+  font-size: 18px;
+}
+
+/* Kuis Options (Mode Mencocokkan) */
+.opsi-kuis {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 18px 0;
+}
+@media (min-width: 480px) {
+  .opsi-kuis {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.btn-opsi-kuis {
+  min-height: 58px;
+  font-size: 20px;
+  font-weight: 800;
+  border-radius: 18px;
+  border: 3px solid var(--border-komik);
+  background: var(--permukaan);
+  color: var(--teks);
+  cursor: pointer;
+  box-shadow: 0 5px 0 var(--border-komik);
+  text-transform: uppercase;
+  padding: 14px 16px;
+  transition: transform var(--transisi), box-shadow var(--transisi), background var(--transisi);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+}
+.btn-opsi-kuis:hover:not(:disabled) {
+  border-color: var(--warna-utama);
+  background: #EFF6FF;
+  box-shadow: 0 7px 0 var(--border-komik);
+  transform: translateY(-2px);
+}
+.btn-opsi-kuis:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--border-komik);
+}
+.btn-opsi-kuis.benar {
+  background: var(--benar) !important;
+  color: #FFFFFF !important;
+  border-color: var(--border-komik) !important;
+  box-shadow: 0 5px 0 var(--border-komik) !important;
+}
+.btn-opsi-kuis.salah {
+  background: var(--salah) !important;
+  color: #FFFFFF !important;
+  border-color: var(--border-komik) !important;
+  box-shadow: 0 5px 0 var(--border-komik) !important;
+}
+
+/* Umpan Balik Siswa Hangat & Ceria */
+.umpan-balik-box {
+  min-height: 44px;
+  font-size: 20px;
+  font-weight: 800;
+  margin: 14px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 14px;
+  padding: 8px 14px;
+}
+.umpan-benar {
+  background: #ECFDF5;
+  color: #065F46;
+  border: 2px solid #10B981;
+}
+.umpan-salah {
+  background: #FEF2F2;
+  color: #991B1B;
+  border: 2px solid #EF4444;
+}
+
+/* Virtual PIN Pad Mainan Anak (Toy Calculator Style) */
+.pin-pad-siswa {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 290px;
+  margin: 18px auto;
+}
+.btn-pin-angka {
+  min-height: 56px;
+  font-size: 24px;
+  font-weight: 900;
+  border-radius: 16px;
+  border: 2.5px solid var(--border-komik);
+  background: #FFFFFF;
+  color: var(--border-komik);
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--border-komik);
+  transition: transform var(--transisi), box-shadow var(--transisi), background var(--transisi);
+  font-family: inherit;
+}
+.btn-pin-angka:hover {
+  background: #FEF08A;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--border-komik);
+}
+.btn-pin-angka:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--border-komik);
+}
+.btn-pin-angka.btn-pin-hapus {
+  font-size: 16px;
+  background: #FEE2E2;
+  color: #991B1B;
+}
+.btn-pin-angka.btn-pin-clear {
+  font-size: 16px;
+  background: #F1F5F9;
+  color: #475569;
+}
+
+/* ==============================================================
+   ZONA STAF (guru/, kepsek/, operator/)
+   - Bersih, profesional, fungsional tapi tetap ramah sekolah
+   ============================================================== */
+.staf {
+  font-size: 16px;
+}
+@media (min-width: 900px) {
+  .staf .wrap { flex-direction: row; }
+  .staf .side {
+    flex-direction: column;
+    width: 240px;
+    min-height: calc(100vh - 65px);
+    border-right: 2.5px solid var(--garis);
+    border-bottom: 0;
+    padding: 20px 0;
+    flex-shrink: 0;
+    background: var(--permukaan);
+  }
+}
+
+.staf .side {
+  display: flex;
+  background: var(--permukaan);
+  border-bottom: 2.5px solid var(--garis);
+  padding: 10px 14px;
+  gap: 6px;
+  overflow-x: auto;
+}
+.staf .side a {
+  text-decoration: none;
+  color: var(--teks);
+  padding: 11px 18px;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 12px;
+  margin: 2px 10px;
+  transition: background var(--transisi), color var(--transisi);
+  display: block;
+  white-space: nowrap;
+}
+.staf .side a:hover {
+  background: #EFF6FF;
+  color: var(--warna-utama);
+}
+.staf .side a.aktif {
+  background: var(--warna-utama);
+  color: #FFFFFF;
+}
+
+/* Card Staf */
+.card-staf {
+  background: var(--permukaan);
+  border: 2px solid var(--garis-tebal);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 0 var(--garis);
+}
+
+/* Kartu Angka Dashboard Staf */
+.stat-card-staf {
+  background: var(--permukaan);
+  border: 2.5px solid var(--border-komik);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 5px 0 var(--garis-tebal);
+  text-align: left;
+  border-top: 6px solid var(--warna-utama);
+}
+.stat-card-angka {
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--warna-utama);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.stat-card-label {
+  font-size: 15px;
+  color: #475569;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+/* Tombol Staf */
+.btn-staf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: var(--warna-utama);
+  color: #FFFFFF;
+  border: 2px solid var(--border-komik);
+  font: inherit;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 4px 0 var(--border-komik);
+  text-decoration: none;
+  transition: transform var(--transisi), box-shadow var(--transisi), background var(--transisi);
+}
+.btn-staf:hover {
+  background: #1D4ED8;
+  text-decoration: none;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--border-komik);
+}
+.btn-staf:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--border-komik);
+}
+.btn-staf-aksen {
+  background: var(--warna-oranye);
+}
+.btn-staf-aksen:hover { background: #EA580C; }
+.btn-staf-netral {
+  background: #FFFFFF;
+  color: var(--border-komik);
+}
+.btn-staf-netral:hover { background: #F1F5F9; color: var(--border-komik); }
+.btn-staf-merah {
+  background: var(--salah);
+}
+.btn-staf-merah:hover { background: #DC2626; }
+
+/* Tabel Staf Rapi */
+.tabel-staf-bungkus {
+  overflow-x: auto;
+  border: 2px solid var(--border-komik);
+  border-radius: 14px;
+  background: var(--permukaan);
+  box-shadow: 0 4px 0 var(--garis);
+}
+table.tabel-staf {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+table.tabel-staf th {
+  background: #F8FAFC;
+  color: var(--teks);
+  font-weight: 800;
+  padding: 12px 16px;
+  border-bottom: 2.5px solid var(--garis-tebal);
+  font-size: 14px;
+}
+table.tabel-staf td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--garis);
+  font-size: 15px;
+  vertical-align: middle;
+}
+table.tabel-staf tr:nth-child(even) td {
+  background: #F8FAFC;
+}
+table.tabel-staf tr:hover td {
+  background: #EFF6FF;
+}
+
+/* Grid Helper */
+.grid { display: grid; gap: 16px; }
+.dua { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.tiga { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.empat { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+/* Forms & Inputs */
+label {
+  display: block;
+  font-weight: 800;
+  margin: 14px 0 6px;
+  color: var(--teks);
+}
+input[type=text],
+input[type=password],
+input[type=search],
+input[type=number],
+select,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2.5px solid var(--border-komik);
+  border-radius: 14px;
+  font: inherit;
+  font-size: 16px;
+  background: #FFFFFF;
+  color: var(--teks);
+  box-shadow: 0 3px 0 var(--garis);
+  transition: border-color var(--transisi), box-shadow var(--transisi);
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--warna-utama);
+  box-shadow: 0 3px 0 var(--warna-utama);
+}
+.bantu {
+  font-size: 14px;
+  color: #64748B;
+  margin-top: 4px;
+}
+.pesan {
+  padding: 14px 18px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  font-weight: 700;
+  font-size: 15px;
+  border: 2px solid transparent;
+}
+.pesan.galat {
+  background: #FEF2F2;
+  color: #991B1B;
+  border-color: #EF4444;
+}
+.pesan.sukses {
+  background: #ECFDF5;
+  color: #065F46;
+  border-color: #10B981;
+}
+.kembali-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  font-weight: 800;
+  color: var(--teks);
+}
+.kembali-link:hover {
+  color: var(--warna-utama);
+}
+
+/* Papan Peringkat Podium Juara (Podium 1st, 2nd, 3rd) */
+.podium-wrap {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+  margin: 28px 0 20px;
+}
+.podium-item {
+  flex: 1;
+  max-width: 140px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.podium-item.juara-1 { order: 2; }
+.podium-item.juara-2 { order: 1; }
+.podium-item.juara-3 { order: 3; }
+
+.podium-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid var(--border-komik);
+  background: #FEF08A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 0 var(--border-komik);
+}
+.podium-nama {
+  font-size: 15px;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.podium-skor {
+  font-size: 14px;
+  color: #D97706;
+  font-weight: 800;
+}
+.podium-balok {
+  width: 100%;
+  border: 3px solid var(--border-komik);
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-weight: 900;
+  font-size: 28px;
+  box-shadow: 0 4px 0 var(--border-komik);
+  margin-top: 8px;
+}
+.podium-balok.b-1 { height: 110px; background: #F59E0B; }
+.podium-balok.b-2 { height: 80px; background: #94A3B8; }
+.podium-balok.b-3 { height: 60px; background: #D97706; }

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <!-- Kiko si Kucing Pintar (Mascot KPKu) - Human Crafted & Kid Friendly -->
+  <g id="kiko-mascot">
+    <!-- Shadow -->
+    <ellipse cx="80" cy="148" rx="46" ry="8" fill="#E2E8F0"/>
+    
+    <!-- Backpack peek -->
+    <rect x="34" y="80" width="16" height="32" rx="8" fill="#EF4444" stroke="#1E293B" stroke-width="3"/>
+    
+    <!-- Body -->
+    <ellipse cx="80" cy="110" rx="36" ry="32" fill="#FBBF24" stroke="#1E293B" stroke-width="3.5"/>
+    <ellipse cx="80" cy="114" rx="22" ry="20" fill="#FEF3C7"/>
+    
+    <!-- Tail with white tip -->
+    <path d="M112 118 C135 125 142 100 136 86 C134 82 128 85 129 90 C132 100 126 112 110 108 Z" fill="#F59E0B" stroke="#1E293B" stroke-width="3"/>
+    
+    <!-- Feet -->
+    <ellipse cx="64" cy="140" rx="14" ry="9" fill="#FFFFFF" stroke="#1E293B" stroke-width="3"/>
+    <ellipse cx="96" cy="140" rx="14" ry="9" fill="#FFFFFF" stroke="#1E293B" stroke-width="3"/>
+    
+    <!-- Ears -->
+    <polygon points="46,48 30,14 62,32" fill="#F59E0B" stroke="#1E293B" stroke-width="3.5" stroke-linejoin="round"/>
+    <polygon points="48,44 38,24 58,34" fill="#F472B6"/>
+    
+    <polygon points="114,48 130,14 98,32" fill="#F59E0B" stroke="#1E293B" stroke-width="3.5" stroke-linejoin="round"/>
+    <polygon points="112,44 122,24 102,34" fill="#F472B6"/>
+
+    <!-- Head -->
+    <circle cx="80" cy="62" r="42" fill="#FBBF24" stroke="#1E293B" stroke-width="3.5"/>
+    
+    <!-- Rosy Cheeks -->
+    <ellipse cx="50" cy="74" rx="8" ry="5" fill="#FDA4AF"/>
+    <ellipse cx="110" cy="74" rx="8" ry="5" fill="#FDA4AF"/>
+    
+    <!-- Big Sparkling Eyes -->
+    <!-- Left Eye -->
+    <ellipse cx="62" cy="60" rx="9" ry="11" fill="#1E293B"/>
+    <circle cx="59" cy="56" r="3.5" fill="#FFFFFF"/>
+    <circle cx="65" cy="64" r="1.5" fill="#FFFFFF"/>
+    
+    <!-- Right Eye -->
+    <ellipse cx="98" cy="60" rx="9" ry="11" fill="#1E293B"/>
+    <circle cx="95" cy="56" r="3.5" fill="#FFFFFF"/>
+    <circle cx="101" cy="64" r="1.5" fill="#FFFFFF"/>
+    
+    <!-- Cute Triangle Nose -->
+    <polygon points="77,69 83,69 80,74" fill="#F43F5E"/>
+    
+    <!-- Happy Cat Mouth -->
+    <path d="M74 74 C77 78 80 77 80 74 C80 77 83 78 86 74" fill="none" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Little tongue open -->
+    <path d="M77 76 C77 82 83 82 83 76 Z" fill="#FB7185" stroke="#1E293B" stroke-width="2"/>
+    
+    <!-- Whiskers -->
+    <line x1="42" y1="68" x2="26" y2="65" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+    <line x1="42" y1="74" x2="25" y2="76" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+    <line x1="118" y1="68" x2="134" y2="65" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+    <line x1="118" y1="74" x2="135" y2="76" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+    
+    <!-- Scarf / Collar with Bell -->
+    <path d="M50 94 C65 104 95 104 110 94" fill="none" stroke="#2563EB" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="80" cy="101" r="7" fill="#FACC15" stroke="#1E293B" stroke-width="2"/>
+    <circle cx="80" cy="101" r="2" fill="#B45309"/>
+
+    <!-- Left Hand (Paws) -->
+    <ellipse cx="50" cy="108" rx="8" ry="7" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+    
+    <!-- Right Hand (Waving cheerfully!) -->
+    <g transform="rotate(-15 116 95)">
+      <ellipse cx="118" cy="85" rx="8" ry="11" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+      <!-- Sparkle near wave -->
+      <path d="M136 70 L138 75 L143 77 L138 79 L136 84 L134 79 L129 77 L134 75 Z" fill="#F59E0B"/>
+    </g>
+  </g>
+</svg>

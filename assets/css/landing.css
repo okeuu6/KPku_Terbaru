@@ -1,0 +1,645 @@
+/* ==============================================================
+   MEDIA BELAJAR INGGRIS SD - KPKU
+   Landing Page Stylesheet - Ceria, Taktil, & Ramah Anak SD
+   Human-Crafted (Bukan Template AI)
+   ============================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --warna-utama: #2563EB;
+  --warna-utama-d: #1D4ED8;
+  --warna-aksen: #F59E0B;
+  --warna-aksen-d: #D97706;
+  --warna-oranye: #FF6B4A;
+  --warna-oranye-d: #E8502C;
+  --warna-ungu: #8B5CF6;
+  --warna-ungu-d: #7C3AED;
+  --latar: #FFFDF7;
+  --permukaan: #FFFFFF;
+  --teks: #1E293B;
+  --teks-muda: #64748B;
+  --garis: #E2E8F0;
+  --garis-tebal: #CBD5E1;
+  --border-komik: #1E293B;
+  --benar: #10B981;
+  --salah: #EF4444;
+
+  --font-keluarga: 'Fredoka', 'Nunito', 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --transisi: 120ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  margin: 0;
+  font-family: var(--font-keluarga);
+  background-color: var(--latar);
+  background-image: radial-gradient(#E2E8F0 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  color: var(--teks);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header Lengket Ramah Anak */
+.lp-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #FFFFFF;
+  border-bottom: 3.5px solid var(--border-komik);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.06);
+}
+.header-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--teks);
+}
+.brand-logo {
+  width: 44px;
+  height: 44px;
+  display: block;
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,0.1));
+}
+.brand-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--teks);
+  line-height: 1.1;
+}
+.brand-title span {
+  color: var(--warna-utama);
+}
+.brand-title small {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--teks-muda);
+  font-weight: 700;
+}
+
+.lp-nav {
+  display: none;
+  align-items: center;
+  gap: 22px;
+}
+.lp-nav a {
+  text-decoration: none;
+  color: var(--teks);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  transition: all var(--transisi);
+}
+.lp-nav a:hover {
+  color: var(--warna-utama);
+  background: #EFF6FF;
+}
+@media (min-width: 860px) {
+  .lp-nav { display: flex; }
+}
+
+/* Tombol Landing Page (3D Tactile Pop Button) */
+.btn-lp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 16px;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  border: 2.5px solid var(--border-komik);
+  box-shadow: 0 5px 0 var(--border-komik);
+  transition: transform var(--transisi), box-shadow var(--transisi), background var(--transisi);
+  font-family: inherit;
+  user-select: none;
+}
+.btn-lp:hover {
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 var(--border-komik);
+}
+.btn-lp:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--border-komik);
+}
+.btn-lp-utama {
+  background: var(--warna-utama);
+  color: #FFFFFF;
+}
+.btn-lp-utama:hover {
+  background: #1D4ED8;
+  color: #FFFFFF;
+}
+.btn-lp-aksen {
+  background: var(--warna-aksen);
+  color: #1E293B;
+}
+.btn-lp-aksen:hover {
+  background: #EAB308;
+  color: #1E293B;
+}
+.btn-lp-oranye {
+  background: var(--warna-oranye);
+  color: #FFFFFF;
+}
+.btn-lp-oranye:hover {
+  background: #EA580C;
+  color: #FFFFFF;
+}
+.btn-lp-hijau {
+  background: var(--benar);
+  color: #FFFFFF;
+}
+.btn-lp-hijau:hover {
+  background: #059669;
+  color: #FFFFFF;
+}
+.btn-lp-netral {
+  background: #FFFFFF;
+  color: var(--border-komik);
+}
+.btn-lp-netral:hover {
+  background: #F1F5F9;
+  color: var(--border-komik);
+}
+
+/* ==================== HERO SECTION ==================== */
+.hero-section {
+  padding: 50px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: center;
+}
+@media (min-width: 860px) {
+  .hero-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FEF08A;
+  color: var(--border-komik);
+  border: 2px solid var(--border-komik);
+  border-radius: 50px;
+  padding: 6px 16px;
+  font-size: 15px;
+  font-weight: 800;
+  box-shadow: 0 3px 0 var(--border-komik);
+  transform: rotate(-1.5deg);
+  margin-bottom: 16px;
+}
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 0 0 16px;
+  color: var(--teks);
+  letter-spacing: -0.02em;
+}
+.hero-title .sorot {
+  color: var(--warna-utama);
+  position: relative;
+  display: inline-block;
+}
+.hero-title .sorot::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 100%;
+  height: 8px;
+  background: #FEF08A;
+  z-index: -1;
+  border-radius: 4px;
+}
+.hero-desc {
+  font-size: 1.15rem;
+  color: #475569;
+  line-height: 1.6;
+  margin: 0 0 26px;
+  font-weight: 600;
+}
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Hero Interactive Card Flashcard Ceria */
+.hero-card-box {
+  background: #FFFFFF;
+  border: 3.5px solid var(--border-komik);
+  border-radius: 28px;
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: 0 10px 0 var(--garis-tebal);
+  position: relative;
+  transform: rotate(1deg);
+  transition: transform var(--transisi);
+}
+.hero-card-box:hover {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow: 0 14px 0 var(--garis-tebal);
+}
+.hero-card-tag {
+  position: absolute;
+  top: -14px;
+  right: 20px;
+  background: var(--warna-aksen);
+  color: var(--border-komik);
+  border: 2px solid var(--border-komik);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 800;
+  box-shadow: 0 2px 0 var(--border-komik);
+  transform: rotate(3deg);
+}
+.hero-card-img-wrap {
+  width: 170px;
+  height: 170px;
+  margin: 0 auto 14px;
+  background: #F0FDF4;
+  border: 2.5px solid var(--border-komik);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 0 var(--garis-tebal);
+}
+.hero-card-img {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+}
+.hero-word-title {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--warna-utama);
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+.hero-word-arti {
+  font-size: 18px;
+  font-weight: 700;
+  color: #64748B;
+  margin-bottom: 16px;
+}
+
+/* ==================== SECTION UMUM ==================== */
+.section {
+  padding: 55px 0;
+  border-top: 3px solid var(--garis-tebal);
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.section-kategori {
+  display: inline-block;
+  background: #EFF6FF;
+  color: var(--warna-utama);
+  border: 2px solid var(--warna-utama);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-weight: 800;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.section-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--teks);
+  margin: 0 0 10px;
+}
+.section-desc {
+  font-size: 1.1rem;
+  color: #64748B;
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: 600;
+}
+
+/* ==================== FITUR GRID ==================== */
+.fitur-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+.fitur-item {
+  background: #FFFFFF;
+  border: 3px solid var(--border-komik);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 6px 0 var(--garis-tebal);
+  transition: transform var(--transisi), box-shadow var(--transisi);
+  position: relative;
+}
+.fitur-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 0 var(--garis-tebal);
+}
+.fitur-icon-box {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  border: 2.5px solid var(--border-komik);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 0 var(--border-komik);
+}
+.fitur-item:nth-child(1) .fitur-icon-box { background: #BFDBFE; }
+.fitur-item:nth-child(2) .fitur-icon-box { background: #FEF08A; }
+.fitur-item:nth-child(3) .fitur-icon-box { background: #BBF7D0; }
+.fitur-item:nth-child(4) .fitur-icon-box { background: #DDD6FE; }
+
+.fitur-item h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: var(--teks);
+}
+.fitur-item p {
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.55;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* ==================== LANGKAH PETUALANGAN ==================== */
+.langkah-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.langkah-item {
+  background: #FFFFFF;
+  border: 3px solid var(--border-komik);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 6px 0 var(--garis-tebal);
+  text-align: center;
+  position: relative;
+}
+.langkah-nomor {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--warna-aksen);
+  color: #1E293B;
+  border: 2.5px solid var(--border-komik);
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 14px;
+  box-shadow: 0 3px 0 var(--border-komik);
+}
+.langkah-item h4 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: var(--teks);
+}
+.langkah-item p {
+  font-size: 0.95rem;
+  color: #64748B;
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* ==================== PERAN GRID ==================== */
+.peran-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+.peran-item {
+  background: #FFFFFF;
+  border: 3px solid var(--border-komik);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 6px 0 var(--garis-tebal);
+}
+.peran-badge-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 800;
+  border: 2px solid var(--border-komik);
+  margin-bottom: 10px;
+}
+.peran-item:nth-child(1) .peran-badge-tag { background: #BFDBFE; }
+.peran-item:nth-child(2) .peran-badge-tag { background: #BBF7D0; }
+.peran-item:nth-child(3) .peran-badge-tag { background: #FEF08A; }
+.peran-item:nth-child(4) .peran-badge-tag { background: #DDD6FE; }
+
+.peran-item h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 0 0 6px;
+}
+.peran-item p {
+  font-size: 0.95rem;
+  color: #64748B;
+  margin: 0 0 14px;
+  font-weight: 600;
+}
+.peran-item ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #334155;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* ==================== PRATINJAU MOCKUP ==================== */
+.mockup-wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 800px) {
+  .mockup-wrap {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+}
+.mockup-kotak {
+  background: #FFFFFF;
+  border: 3px solid var(--border-komik);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 6px 0 var(--garis-tebal);
+}
+.mockup-header-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--garis);
+}
+.mockup-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-komik);
+}
+.mockup-dot.red { background: #EF4444; }
+.mockup-dot.yellow { background: #F59E0B; }
+.mockup-dot.green { background: #10B981; }
+
+.mockup-judul {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--teks);
+  margin-left: 6px;
+}
+
+/* ==================== FAQ ==================== */
+.faq-list {
+  max-width: 750px;
+  margin: 0 auto;
+  display: grid;
+  gap: 14px;
+}
+.faq-kotak {
+  background: #FFFFFF;
+  border: 2.5px solid var(--border-komik);
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 0 var(--garis-tebal);
+  transition: all var(--transisi);
+}
+.faq-kotak summary {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--teks);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.faq-kotak summary::-webkit-details-marker { display: none; }
+.faq-kotak summary::after {
+  content: '▼';
+  font-size: 12px;
+  color: var(--warna-utama);
+  transition: transform 0.2s;
+}
+.faq-kotak[open] summary::after {
+  transform: rotate(180deg);
+}
+.faq-kotak p {
+  margin: 12px 0 4px;
+  color: #475569;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+/* ==================== FOOTER ==================== */
+.lp-footer {
+  background: #FFFFFF;
+  border-top: 3.5px solid var(--border-komik);
+  padding: 30px 0;
+  font-weight: 700;
+}
+.footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  color: #64748B;
+  font-size: 0.95rem;
+}
+
+/* ==================== MODAL APLIKASI INTERAKTIF ==================== */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 23, 42, 0.7);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  backdrop-filter: blur(2px);
+}
+.modal-overlay.buka { display: flex; }
+.modal-box {
+  background: var(--latar);
+  background-image: radial-gradient(#E2E8F0 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  border: 4px solid var(--border-komik);
+  border-radius: 28px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px 24px;
+  position: relative;
+  box-shadow: 0 14px 0 rgba(0, 0, 0, 0.2);
+  transition: max-width 0.2s ease;
+}
+.modal-box.modal-lebar {
+  max-width: 860px;
+}
+.btn-tutup {
+  position: absolute;
+  top: 14px; right: 16px;
+  background: #FEE2E2;
+  color: #991B1B;
+  border: 2px solid var(--border-komik);
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 6px 14px;
+  box-shadow: 0 3px 0 var(--border-komik);
+  font-family: inherit;
+  transition: transform var(--transisi);
+}
+.btn-tutup:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 0 var(--border-komik);
+}

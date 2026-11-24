@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect x="6" y="6" width="188" height="188" rx="22" fill="#EFF6FF" stroke="#1E293B" stroke-width="3"/>
+  <!-- Open Book Cover -->
+  <path d="M28 62 C56 52, 90 56, 100 66 C110 56, 144 52, 172 62 L172 148 C144 138, 110 142, 100 152 C90 142, 56 138, 28 148 Z" fill="#2563EB" stroke="#1E293B" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- White Pages -->
+  <path d="M34 58 C60 48, 92 53, 100 62 C108 53, 140 48, 166 58 L166 142 C140 132, 108 137, 100 146 C92 137, 60 132, 34 142 Z" fill="#FFFFFF" stroke="#1E293B" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Center Line -->
+  <line x1="100" y1="62" x2="100" y2="146" stroke="#1E293B" stroke-width="3"/>
+  <!-- Bookmark Ribbon -->
+  <path d="M96 62 L96 112 L100 108 L104 112 L104 62 Z" fill="#EF4444" stroke="#1E293B" stroke-width="2"/>
+  <!-- Lines of text -->
+  <line x1="46" y1="80" x2="86" y2="76" stroke="#93C5FD" stroke-width="3" stroke-linecap="round"/>
+  <line x1="46" y1="94" x2="84" y2="90" stroke="#93C5FD" stroke-width="3" stroke-linecap="round"/>
+  <line x1="46" y1="108" x2="80" y2="105" stroke="#93C5FD" stroke-width="3" stroke-linecap="round"/>
+  <line x1="114" y1="76" x2="154" y2="80" stroke="#93C5FD" stroke-width="3" stroke-linecap="round"/>
+  <line x1="116" y1="90" x2="154" y2="94" stroke="#93C5FD" stroke-width="3" stroke-linecap="round"/>
+  <line x1="120" y1="105" x2="154" y2="108" stroke="#93C5FD" stroke-width="3" stroke-linecap="round"/>
+</svg>

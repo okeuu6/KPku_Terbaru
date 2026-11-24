@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <!-- Kiko Juara dengan Piala Emas & Bintang - Human Crafted -->
+  <g id="kiko-juara">
+    <!-- Star sparkles in background -->
+    <path d="M25 40 L28 46 L34 48 L28 50 L25 56 L22 50 L16 48 L22 46 Z" fill="#F59E0B"/>
+    <path d="M150 35 L153 41 L159 43 L153 45 L150 51 L147 45 L141 43 L147 41 Z" fill="#F59E0B"/>
+    <path d="M155 125 L157 129 L161 131 L157 133 L155 137 L153 133 L149 131 L153 129 Z" fill="#EF4444"/>
+    <path d="M20 120 L22 124 L26 126 L22 128 L20 132 L18 128 L14 126 L18 124 Z" fill="#10B981"/>
+
+    <!-- Shadow -->
+    <ellipse cx="90" cy="165" rx="55" ry="9" fill="#E2E8F0"/>
+
+    <!-- Tail -->
+    <path d="M125 130 C150 135 158 110 150 94 C148 90 142 93 143 98 C146 108 140 122 122 118 Z" fill="#F59E0B" stroke="#1E293B" stroke-width="3"/>
+
+    <!-- Body -->
+    <ellipse cx="90" cy="125" rx="38" ry="34" fill="#FBBF24" stroke="#1E293B" stroke-width="3.5"/>
+    <ellipse cx="90" cy="129" rx="24" ry="22" fill="#FEF3C7"/>
+
+    <!-- Feet -->
+    <ellipse cx="72" cy="156" rx="15" ry="9" fill="#FFFFFF" stroke="#1E293B" stroke-width="3"/>
+    <ellipse cx="108" cy="156" rx="15" ry="9" fill="#FFFFFF" stroke="#1E293B" stroke-width="3"/>
+
+    <!-- Ears -->
+    <polygon points="56,62 38,26 72,44" fill="#F59E0B" stroke="#1E293B" stroke-width="3.5" stroke-linejoin="round"/>
+    <polygon points="58,58 46,36 68,46" fill="#F472B6"/>
+    
+    <polygon points="124,62 142,26 108,44" fill="#F59E0B" stroke="#1E293B" stroke-width="3.5" stroke-linejoin="round"/>
+    <polygon points="122,58 134,36 112,46" fill="#F472B6"/>
+
+    <!-- Head -->
+    <circle cx="90" cy="76" r="44" fill="#FBBF24" stroke="#1E293B" stroke-width="3.5"/>
+
+    <!-- Party / Winner Hat (Golden Party Crown) -->
+    <polygon points="70,38 78,16 90,30 102,16 110,38" fill="#F59E0B" stroke="#1E293B" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="78" cy="16" r="3" fill="#EF4444"/>
+    <circle cx="90" cy="30" r="3" fill="#2563EB"/>
+    <circle cx="102" cy="16" r="3" fill="#10B981"/>
+
+    <!-- Rosy Cheeks -->
+    <ellipse cx="58" cy="88" rx="8" ry="5" fill="#FDA4AF"/>
+    <ellipse cx="122" cy="88" rx="8" ry="5" fill="#FDA4AF"/>
+
+    <!-- Cheerful Eyes (Happy closed-curved arcs or sparkling big eyes) -->
+    <path d="M64 76 C68 68 78 68 82 76" fill="none" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M98 76 C102 68 112 68 116 76" fill="none" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round"/>
+
+    <!-- Nose -->
+    <polygon points="87,83 93,83 90,88" fill="#F43F5E"/>
+
+    <!-- Super Wide Happy Smile -->
+    <path d="M80 88 C85 94 95 94 100 88" fill="none" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M82 91 C86 103 94 103 98 91 Z" fill="#FB7185" stroke="#1E293B" stroke-width="2"/>
+
+    <!-- Whiskers -->
+    <line x1="50" y1="82" x2="34" y2="80" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+    <line x1="50" y1="88" x2="33" y2="91" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+    <line x1="130" y1="82" x2="146" y2="80" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+    <line x1="130" y1="88" x2="147" y2="91" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Winner Medal / Ribbon on Chest -->
+    <path d="M82 108 L76 126 L86 122 L94 126 L90 108" fill="#EF4444" stroke="#1E293B" stroke-width="2"/>
+    <circle cx="86" cy="116" r="9" fill="#FACC15" stroke="#1E293B" stroke-width="2"/>
+    <!-- Star on medal -->
+    <path d="M86 111 L87.5 114.5 L91 114.5 L88 117 L89.5 120.5 L86 118.5 L82.5 120.5 L84 117 L81 114.5 L84.5 114.5 Z" fill="#D97706"/>
+
+    <!-- Golden Trophy Held by Both Paws -->
+    <g transform="translate(18, 92)">
+      <!-- Left Paw holding trophy handle -->
+      <ellipse cx="48" cy="24" rx="8" ry="7" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+      <!-- Right Paw holding trophy handle -->
+      <ellipse cx="96" cy="24" rx="8" ry="7" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+
+      <!-- Trophy Base -->
+      <rect x="62" y="44" width="20" height="8" rx="2" fill="#B45309" stroke="#1E293B" stroke-width="2.5"/>
+      <polygon points="68,44 76,44 74,34 70,34" fill="#F59E0B" stroke="#1E293B" stroke-width="2"/>
+      
+      <!-- Trophy Handles -->
+      <path d="M56 12 C46 12 46 28 58 30" fill="none" stroke="#1E293B" stroke-width="3" stroke-linecap="round"/>
+      <path d="M88 12 C98 12 98 28 86 30" fill="none" stroke="#1E293B" stroke-width="3" stroke-linecap="round"/>
+      
+      <!-- Trophy Cup -->
+      <path d="M56 10 C56 32 88 32 88 10 Z" fill="#FACC15" stroke="#1E293B" stroke-width="2.5"/>
+      <!-- Star on Trophy Cup -->
+      <circle cx="72" cy="20" r="5" fill="#FEF08A"/>
+      <path d="M72 16 L73 19 L76 19 L73.5 21 L74.5 24 L72 22 L69.5 24 L70.5 21 L68 19 L71 19 Z" fill="#B45309"/>
+    </g>
+  </g>
+</svg>

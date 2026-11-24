@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="csrf" content="<%= csrf %>">
+  <title><%= judul %> - <%= config.namaAplikasi %></title>
+  <link rel="icon" type="image/svg+xml" href="<%= url('assets/img/logo.svg') %>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="<%= url('assets/css/app.css') %>">
+</head>
+<body class="<%= staf ? 'staf' : 'siswa-zona' %>">
+
+  <header class="topbar">
+    <div class="brand-group">
+      <a href="<%= url('index.php') %>" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="<%= url('assets/img/logo.svg') %>" alt="Logo" class="brand-logo">
+        <span class="brand"><%= config.namaAplikasi %></span>
+      </a>
+      <span class="brand-sub"><%= config.namaSekolah %></span>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button id="btn-audio-toggle" type="button" class="btn-topbar" onclick="if(window.KuisEfek){var m=window.KuisEfek.suara.toggleMute();this.textContent=m?'🔇 Suara Mati':'🔊 Suara Nyala';}" title="Nyalakan / Matikan Efek Suara">🔊 Suara</button>
+      <% if (role) { %>
+        <span class="who">Halo, <strong><%= user.nama %></strong>
+          <% if (staf) { %> <span class="peran-label"><%= labelPeran(role) %></span><% } %>
+        </span>
+        <a class="btn-staf btn-topbar" href="<%= url('logout.php') %>">Keluar</a>
+      <% } else { %>
+        <a class="btn-staf btn-topbar" href="<%= url('index.php') %>">Masuk</a>
+      <% } %>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <% if (staf) { %>
+      <nav class="side" aria-label="Navigasi Menu">
+        <% menuList.forEach(([href, lbl, re]) => { %>
+          <% const isAktif = re.test(scriptKey); %>
+          <a href="<%= url(href) %>" class="<%= isAktif ? 'aktif' : '' %>"><%= lbl %></a>
+        <% }) %>
+      </nav>
+    <% } %>
+
+    <main class="isi">
+      <% if (back) { %>
+        <a class="kembali-link" href="<%= url(back) %>">&larr; Kembali</a>
+      <% } %>
+      <% if (flashMsg) { %>
+        <% const tipe = (flashMsg[1] === 'err' ? 'galat' : 'sukses'); %>
+        <% const label = (flashMsg[1] === 'err' ? 'Perhatian: ' : 'Berhasil: '); %>
+        <div class="pesan <%= tipe %>"><%= label %><%= flashMsg[0] %></div>
+      <% } %>

@@ -1,0 +1,78 @@
+<%- include('../partials/header') %>
+<div class="staf-banner">
+  <div>
+    <div class="stiker-badge" style="margin-bottom:8px; background:#DDD6FE;">⚙️ Administrator Sekolah</div>
+    <h1>Kelola Data Master Sekolah</h1>
+    <p>Ringkasan dan akses cepat pengelolaan akun Guru, Siswa, Kepala Sekolah, Operator, dan Kelas.</p>
+  </div>
+  <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+    <a class="btn-staf" href="<%= url('operator/form.php?jenis=siswa') %>">+ Tambah Siswa</a>
+    <a class="btn-staf btn-staf-netral" href="<%= url('operator/form.php?jenis=kelas') %>">+ Tambah Kelas</a>
+  </div>
+</div>
+
+<div class="grid lima">
+  <% kartu.forEach((k) => { %>
+    <div class="stat-card-staf <%= k.aksen %>">
+      <div class="stat-card-icon"><%= k.icon %></div>
+      <div class="stat-card-angka"><%= k.jml %></div>
+      <div class="stat-card-label"><%= k.label %></div>
+      <a class="btn-staf" href="<%= url('operator/daftar.php?jenis=' + k.jenis) %>" style="width:100%;">Kelola &rarr;</a>
+    </div>
+  <% }) %>
+</div>
+
+<div class="card-staf" style="margin-top:22px;">
+  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+    <div>
+      <h2 style="margin:0; font-size:1.25rem; font-weight:800;">🏫 Ringkasan Kelas &amp; Guru Pengampu</h2>
+      <p class="bantu" style="margin:2px 0 0;">Total kosa kata aktif di bank soal: <strong><%= jmlSoal %> kata</strong></p>
+    </div>
+    <form method="post" action="<%= url('operator/reset-demo') %>" onsubmit="return confirm('Pulihkan semua master data ke data contoh awal?');">
+      <%- csrfFieldHtml %>
+      <button type="submit" class="btn-staf btn-staf-aksen" style="font-size:14px; padding:8px 14px;">
+        🔄 Pulihkan Data Awal
+      </button>
+    </form>
+  </div>
+
+  <% if (!kelasRingkas.length) { %>
+    <p class="bantu">Belum ada kelas terdaftar.</p>
+  <% } else { %>
+    <div class="tabel-staf-bungkus">
+      <table class="tabel-staf">
+        <thead>
+          <tr>
+            <th>Kelas</th>
+            <th>Kode Kelas</th>
+            <th>Guru Pengampu</th>
+            <th style="text-align:right;">Jumlah Siswa</th>
+            <th style="text-align:right;">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% kelasRingkas.forEach((kl) => { %>
+            <tr>
+              <td><strong><%= kl.nama_kelas %></strong></td>
+              <td><span class="peran-label" style="background:#EFF6FF; font-family:monospace;"><%= kl.kode_kelas %></span></td>
+              <td><%= kl.guru %></td>
+              <td style="text-align:right; font-weight:800;"><%= kl.jmlSiswa %> siswa</td>
+              <td style="text-align:right;">
+                <a class="btn-staf btn-staf-netral" style="padding:4px 10px; font-size:13px;" href="<%= url('operator/form.php?jenis=kelas&id=' + kl.id_kelas) %>">Ubah</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</div>
+
+<% if (jmlGuru === 0) { %>
+  <div class="card-staf" style="margin-top:20px;">
+    <h2 style="margin:0 0 6px; font-size:1.2rem;">Data Contoh</h2>
+    <p class="bantu">Belum ada data guru. Anda dapat memuat data contoh (guru, kepala sekolah, kelas, siswa, dan kosa kata) untuk mencoba aplikasi.</p>
+    <a class="btn-staf btn-staf-aksen" href="<%= url('setup/data-contoh.php') %>">Muat Data Contoh</a>
+  </div>
+<% } %>
+<%- include('../partials/footer') %>

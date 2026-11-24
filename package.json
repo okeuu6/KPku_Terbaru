@@ -1,0 +1,20 @@
+{
+  "name": "media-belajar-inggris-sd-kpku",
+  "version": "1.0.0",
+  "description": "Media Pembelajaran Interaktif Bahasa Inggris Berbasis Web untuk Siswa Sekolah Dasar - KPKu",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node --check server.js",
+    "lint": "node --check server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "ejs": "^7.0.2",
+    "express": "^5.3.0",
+    "express-session": "^1.19.0",
+    "multer": "^2.5.0"
+  }
+}

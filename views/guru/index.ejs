@@ -1,0 +1,82 @@
+<%- include('../partials/header') %>
+<div class="staf-banner">
+  <div>
+    <div class="stiker-badge" style="margin-bottom:8px; background:#BBF7D0;">👩‍🏫 Ruang Kerja Guru Kelas</div>
+    <h1>Kelas Tersedia &amp; Materi Soal</h1>
+    <p>Kelola kelas yang Anda ampu, pantau poin dan PIN siswa, serta susun kosa kata bergambar.</p>
+  </div>
+  <div style="display:flex; gap:10px; flex-wrap:wrap;">
+    <a class="btn-staf btn-staf-aksen" href="<%= url('guru/soal-form.php') %>">+ Tambah Soal</a>
+    <a class="btn-staf" href="<%= url('guru/soal.php') %>">📝 Kelola Soal (<%= jmlSoal %>)</a>
+  </div>
+</div>
+
+<div class="grid tiga" style="margin-bottom:22px;">
+  <div class="stat-card-staf aksen-biru">
+    <div class="stat-card-icon">🏫</div>
+    <div class="stat-card-angka"><%= kelas.length %></div>
+    <div class="stat-card-label">Kelas yang Diampu</div>
+  </div>
+  <div class="stat-card-staf aksen-oranye">
+    <div class="stat-card-icon">🎒</div>
+    <div class="stat-card-angka"><%= totalSiswa %></div>
+    <div class="stat-card-label">Total Siswa Binaan</div>
+  </div>
+  <div class="stat-card-staf aksen-hijau">
+    <div class="stat-card-icon">📖</div>
+    <div class="stat-card-angka"><%= jmlSoal %></div>
+    <div class="stat-card-label">Bank Soal Kosa Kata</div>
+  </div>
+</div>
+
+<h2 style="margin:0 0 12px; font-size:1.25rem; font-weight:800;">🏫 Daftar Kelas Anda</h2>
+
+<% if (!kelas.length) { %>
+  <div class="card-staf">
+    <p class="bantu">Belum ada kelas yang diampu. Hubungi Operator sekolah.</p>
+  </div>
+<% } else { %>
+  <div class="grid dua" style="margin-bottom:22px;">
+    <% kelas.forEach((k) => { %>
+      <div class="card-staf" style="margin-bottom:0;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:2px solid var(--garis); padding-bottom:10px; gap:8px; flex-wrap:wrap;">
+          <strong style="font-size:1.2rem; color:var(--teks);"><%= k.nama_kelas %> (<%= k.kode_kelas %>)</strong>
+          <span class="stiker-badge" style="margin:0; font-size:13px;"><%= Number(k.jml) %> Siswa Terdaftar</span>
+        </div>
+        <p style="margin:0 0 16px; font-size:15px; color:#475569; font-weight:600;">
+          Kode masuk kelas: <code><%= k.kode_kelas %></code> &middot; Akumulasi poin kelas: <strong style="color:#D97706;"><%= k.totalPoin %> ⭐</strong>
+        </p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn-staf btn-staf-netral" href="<%= url('guru/data-siswa.php?id=' + Number(k.id_kelas)) %>">
+            👥 Data Siswa &amp; PIN
+          </a>
+          <a class="btn-staf" href="<%= url('guru/soal.php') %>">
+            📝 Kelola Soal
+          </a>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } %>
+
+<% if (soalPreview && soalPreview.length) { %>
+  <div class="card-staf">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+      <h2 style="margin:0; font-size:1.2rem; font-weight:800;">📖 Pratinjau Kartu Kosa Kata Anda</h2>
+      <a href="<%= url('guru/soal.php') %>" style="font-weight:800; font-size:14px;">Lihat Semua (<%= jmlSoal %>) &rarr;</a>
+    </div>
+    <div class="grid tiga">
+      <% soalPreview.forEach((s) => { %>
+        <div style="display:flex; align-items:center; gap:12px; padding:10px 12px; border:2px solid var(--border-komik); border-radius:14px; background:#F8FAFC;">
+          <img src="<%= gambarUrl(s.gambar) %>" alt="<%= s.kata_inggris %>" style="width:52px; height:52px; object-fit:contain; background:#FFF; border:2px solid var(--garis-tebal); border-radius:10px; padding:4px; flex-shrink:0;">
+          <div style="min-width:0; flex:1;">
+            <div style="font-weight:900; color:var(--warna-utama); font-size:16px; text-transform:uppercase;"><%= s.kata_inggris %></div>
+            <div style="font-size:14px; color:#475569; font-weight:600;"><%= s.arti_indonesia %></div>
+          </div>
+          <button type="button" class="btn-staf btn-staf-netral" style="padding:6px 10px; font-size:14px;" title="Dengarkan pelafalan" data-kata="<%= s.kata_inggris %>" onclick="if('speechSynthesis' in window){speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(this.dataset.kata);u.lang='en-US';u.rate=0.85;speechSynthesis.speak(u);}">🔊</button>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+<% } %>
+<%- include('../partials/footer') %>

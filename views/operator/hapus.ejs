@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+<div class="card-staf" style="max-width:480px; margin:0 auto; text-align:center;">
+  <h2 style="margin:0 0 12px; font-size:1.25rem;">Hapus Data <%= cfg.satu.charAt(0).toUpperCase() + cfg.satu.slice(1) %></h2>
+  <p style="margin:0 0 16px;">
+    Data <%= cfg.satu %> "<strong><%= row.nama || row.nama_kelas || id %></strong>" akan dihapus dari Sistem.
+  </p>
+
+  <% if (blokir) { %>
+    <div class="pesan galat" style="text-align:left;">Galat: <%= blokir %></div>
+    <a class="btn-staf btn-staf-netral" href="<%= url('operator/daftar.php?jenis=' + jenis) %>">Kembali</a>
+  <% } else { %>
+    <form method="post" action="<%= url('operator/hapus.php') %>" style="display:flex; gap:10px; justify-content:center;">
+      <%- csrfFieldHtml %>
+      <input type="hidden" name="jenis" value="<%= jenis %>">
+      <input type="hidden" name="id" value="<%= id %>">
+      <a class="btn-staf btn-staf-netral" href="<%= url('operator/daftar.php?jenis=' + jenis) %>">Batal</a>
+      <button class="btn-staf btn-staf-merah" type="submit">Hapus</button>
+    </form>
+  <% } %>
+</div>
+<%- include('../partials/footer') %>

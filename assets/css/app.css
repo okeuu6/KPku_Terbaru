@@ -635,6 +635,59 @@ table.tabel-staf tr:hover td {
 .dua { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .tiga { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 .empat { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.lima { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+
+/* Banner & Kartu Konsisten Gaya Komik Ceria (selaras dengan index.html) */
+.staf-banner {
+  background: var(--permukaan);
+  border: 3px solid var(--border-komik);
+  border-radius: 20px;
+  padding: 20px 24px;
+  margin-bottom: 22px;
+  box-shadow: 0 6px 0 var(--garis-tebal);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.staf-banner h1 {
+  margin: 0 0 4px;
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: var(--teks);
+}
+.staf-banner p {
+  margin: 0;
+  color: var(--teks-muda);
+  font-weight: 600;
+  font-size: 15px;
+}
+.card-staf {
+  border: 3px solid var(--border-komik);
+  border-radius: 20px;
+  box-shadow: 0 6px 0 var(--garis-tebal);
+}
+.stat-card-staf {
+  border: 3px solid var(--border-komik);
+  border-radius: 20px;
+  box-shadow: 0 6px 0 var(--garis-tebal);
+  transition: transform var(--transisi), box-shadow var(--transisi);
+}
+.stat-card-staf:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 0 var(--garis-tebal);
+}
+.stat-card-staf.aksen-biru { border-top: 7px solid var(--warna-utama); }
+.stat-card-staf.aksen-hijau { border-top: 7px solid var(--benar); }
+.stat-card-staf.aksen-kuning { border-top: 7px solid var(--warna-aksen); }
+.stat-card-staf.aksen-ungu { border-top: 7px solid var(--warna-ungu); }
+.stat-card-staf.aksen-oranye { border-top: 7px solid var(--warna-oranye); }
+.stat-card-icon {
+  font-size: 26px;
+  margin-bottom: 4px;
+  display: inline-block;
+}
 
 /* Forms & Inputs */
 label {

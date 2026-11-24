@@ -1,0 +1,56 @@
+<%- include('../partials/header') %>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+  <div>
+    <h1 style="margin:0; font-size:1.5rem;"><%= cfg.judul %></h1>
+    <p class="bantu">Kelola data <%= cfg.satu %> sekolah.</p>
+  </div>
+  <div>
+    <a class="btn-staf" href="<%= url('operator/form.php?jenis=' + jenis) %>">
+      + Tambah
+    </a>
+  </div>
+</div>
+
+<div class="card-staf">
+  <div style="margin-bottom:14px;">
+    <form method="get" style="display:flex; gap:8px;">
+      <input type="hidden" name="jenis" value="<%= jenis %>">
+      <input type="search" name="q" value="<%= q %>" placeholder="<%= jenis === 'siswa' ? 'Cari nama atau NISN' : (jenis === 'kelas' ? 'Cari nama atau kode kelas' : 'Cari nama atau username') %>" style="max-width:320px;">
+      <button class="btn-staf btn-staf-netral" type="submit">Cari</button>
+      <% if (q !== '') { %>
+        <a class="btn-staf btn-staf-netral" href="<%= url('operator/daftar.php?jenis=' + jenis) %>">Reset</a>
+      <% } %>
+    </form>
+  </div>
+
+  <% if (!rows.length) { %>
+    <p class="bantu"><%= q !== '' ? 'Data tidak ditemukan.' : 'Data masih kosong.' %></p>
+  <% } else { %>
+    <div class="tabel-staf-bungkus">
+      <table class="tabel-staf">
+        <thead>
+          <tr>
+            <% Object.values(kol).forEach((l) => { %>
+              <th><%= l %></th>
+            <% }) %>
+            <th style="text-align:right; width:130px;">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% rows.forEach((r) => { %>
+            <tr>
+              <% Object.keys(kol).forEach((k) => { %>
+                <td><%= r[k] || '-' %></td>
+              <% }) %>
+              <td style="text-align:right;">
+                <a class="btn-staf btn-staf-netral" style="padding:4px 8px; font-size:13px;" href="<%= url('operator/form.php?jenis=' + jenis + '&id=' + encodeURIComponent(String(r.id))) %>">Ubah</a>
+                <a class="btn-staf btn-staf-merah" style="padding:4px 8px; font-size:13px;" href="<%= url('operator/hapus.php?jenis=' + jenis + '&id=' + encodeURIComponent(String(r.id))) %>">Hapus</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</div>
+<%- include('../partials/footer') %>

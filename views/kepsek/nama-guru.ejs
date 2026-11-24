@@ -1,0 +1,40 @@
+<%- include('../partials/header') %>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+  <div>
+    <h1 style="margin:0; font-size:1.5rem;">Nama Guru</h1>
+    <p class="bantu">Daftar guru dan kelas yang diampu.</p>
+  </div>
+  <div>
+    <button class="btn-staf btn-staf-netral" onclick="window.print()" type="button">
+      Cetak
+    </button>
+  </div>
+</div>
+
+<div class="card-staf">
+  <% if (!rows.length) { %>
+    <p class="bantu">Data guru masih kosong.</p>
+  <% } else { %>
+    <div class="tabel-staf-bungkus">
+      <table class="tabel-staf">
+        <thead>
+          <tr>
+            <th style="width:50px;">No</th>
+            <th>Nama Guru</th>
+            <th>Kelas yang Diampu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% rows.forEach((r, i) => { %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <td><strong><%= r.nama %></strong></td>
+              <td><%= r.kelas || '-' %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</div>
+<%- include('../partials/footer') %>

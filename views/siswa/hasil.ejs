@@ -1,0 +1,61 @@
+<%- include('../partials/header') %>
+<div class="siswa-zona" style="max-width:500px; margin:0 auto; text-align:center;">
+  <div class="card-siswa">
+    <img src="<%= url('assets/img/kiko-juara.svg') %>" alt="Juara!" style="width:140px; height:140px; margin:0 auto 10px; display:block; filter:drop-shadow(0 4px 0 rgba(0,0,0,0.1));">
+
+    <div class="stiker-badge" style="background:#BBF7D0;">
+      <span>🎉</span> Horeee! Selesai!
+    </div>
+
+    <h1 style="font-size:32px; font-weight:900; margin:4px 0 8px; color:var(--teks);">
+      <% if (persen >= 0.8) { %>
+        Luar Biasa, Jagoan! 🏆
+      <% } else if (persen >= 0.5) { %>
+        Hebat Banget! 🌟
+      <% } else { %>
+        Kerja Bagus! 💪
+      <% } %>
+    </h1>
+
+    <div style="font-size:34px; margin:8px 0 14px; letter-spacing:6px;">
+      <% if (persen >= 0.8) { %>
+        ⭐⭐⭐
+      <% } else if (persen >= 0.5) { %>
+        ⭐⭐<span style="opacity:0.3;">⭐</span>
+      <% } else { %>
+        ⭐<span style="opacity:0.3;">⭐⭐</span>
+      <% } %>
+    </div>
+
+    <p style="font-size:20px; font-weight:700; color:#334155; margin:0 0 18px;">
+      Kamu berhasil menjawab benar <strong><%= benar %></strong> dari <%= jmlSoal %> soal!
+    </p>
+
+    <div class="poin-siswa-box">
+      <div style="font-size:18px; font-weight:800; color:#B45309;">✨ Poin Tambahan yang Kamu Raih</div>
+      <div class="poin-siswa-angka">+<%= poinSesi %></div>
+      <div style="font-size:17px; font-weight:800; color:var(--teks); margin-top:4px;">
+        Total tabungan poinmu sekarang: <strong style="color:var(--warna-utama);"><%= total %></strong> Poin
+      </div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <a class="btn-siswa btn-siswa-aksen" href="<%= url('siswa/mencocokkan.php') %>">
+        <span style="font-size:22px;">🎮</span> Main Kuis Lagi
+      </a>
+      <a class="btn-siswa btn-siswa-netral" href="<%= url('siswa/menu.php') %>">
+        <span style="font-size:22px;">🏠</span> Kembali ke Menu Utama
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.KuisEfek) {
+      window.KuisEfek.suara.selesai();
+      window.KuisEfek.konfeti();
+    }
+  });
+</script>
+<%- include('../partials/footer') %>

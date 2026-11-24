@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+<div class="card-staf" style="max-width:520px; margin:0 auto;">
+  <h1 style="margin:0 0 8px; font-size:1.4rem;">Muat Data Contoh</h1>
+  <p class="bantu">Membuat 1 guru, 1 kepala sekolah, 1 kelas (kode KLS4A), 2 siswa, dan 8 kosa kata benda. Tentukan sandi dan PIN sendiri.</p>
+
+  <% if (galat) { %>
+    <div class="pesan galat">Galat: <%= galat %></div>
+  <% } %>
+
+  <form method="post" action="<%= url('setup/data-contoh.php') %>" autocomplete="off">
+    <%- csrfFieldHtml %>
+    <label for="sandi">Sandi akun guru.contoh dan kepsek.contoh (min. 8 karakter)</label>
+    <input type="password" id="sandi" name="sandi" autocomplete="new-password" required>
+
+    <label for="pin">PIN 4 angka untuk siswa contoh</label>
+    <input type="text" id="pin" name="pin" maxlength="4" inputmode="numeric" required>
+
+    <div style="display:flex; gap:10px; margin-top:20px;">
+      <button class="btn-staf" type="submit">Muat Data</button>
+      <a class="btn-staf btn-staf-netral" href="<%= url('operator/index.php') %>">Batal</a>
+    </div>
+  </form>
+</div>
+<%- include('../partials/footer') %>

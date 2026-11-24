@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Media Pembelajaran Interaktif Bahasa Inggris Berbasis Web untuk Siswa Sekolah Dasar - KPKu">
+  <meta name="csrf" content="<%= csrf %>">
+  <title><%= config.namaAplikasi %> - KPKu 🎓✨</title>
+  <link rel="icon" type="image/svg+xml" href="<%= url('assets/img/logo.svg') %>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="<%= url('assets/css/app.css') %>">
+  <link rel="stylesheet" href="<%= url('assets/css/landing.css') %>">
+  <style>
+    .tab-peran-bar {
+      display: flex;
+      gap: 6px;
+      border-bottom: 3px solid var(--border-komik);
+      margin-bottom: 20px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+    .tab-peran-btn {
+      flex: 1;
+      min-width: 85px;
+      padding: 10px 6px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 14px;
+      color: #334155;
+      background: #F1F5F9;
+      border: 2px solid var(--border-komik);
+      border-radius: 14px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: transform var(--transisi), background var(--transisi);
+      white-space: nowrap;
+    }
+    .tab-peran-btn:hover {
+      background: #FEF08A;
+      transform: translateY(-2px);
+    }
+    .tab-peran-btn.aktif {
+      background: var(--warna-utama);
+      color: #FFFFFF;
+      box-shadow: 0 3px 0 var(--border-komik);
+    }
+    .portal-panel { display: none; }
+    .portal-panel.aktif { display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- Header Lengket -->
+  <header class="lp-header">
+    <div class="container header-wrap">
+      <a href="<%= url('index.php') %>" class="brand-link">
+        <img src="<%= url('assets/img/logo.svg') %>" alt="Logo" class="brand-logo">
+        <div class="brand-title">
+          Media Belajar <span>Inggris SD</span>
+          <small><%= config.namaSekolah %> &middot; KPKu</small>
+        </div>
+      </a>
+
+      <nav class="lp-nav">
+        <a href="#fitur">Fitur Keren</a>
+        <a href="#cara-kerja">Alur Belajar</a>
+        <a href="#untuk-siapa">Untuk Siapa</a>
+        <a href="#mockup">Pratinjau</a>
+        <a href="#faq">FAQ</a>
+        <a href="#masuk-portal" onclick="pilihTabPeran('siswa')" style="color:var(--warna-utama); font-weight:800;">
+          🎮 Masuk Portal
+        </a>
+      </nav>
+
+      <div style="display:flex; align-items:center; gap:8px;">
+        <button id="btn-sound-top" type="button" class="btn-lp btn-lp-netral" style="padding:8px 12px; font-size:14px;" onclick="if(window.KuisEfek){var m=window.KuisEfek.suara.toggleMute();this.textContent=m?'🔇 Suara Mati':'🔊 Suara Nyala';}" title="Suara">🔊 Suara</button>
+        <% if (userAktif) { %>
+          <a href="<%= url(tujuan[roleAktif] || 'index.php') %>" class="btn-lp btn-lp-utama">
+            Dashboard (<%= userAktif.nama %>)
+          </a>
+        <% } else { %>
+          <a href="#masuk-portal" class="btn-lp btn-lp-utama" onclick="pilihTabPeran('siswa')">
+            🎒 Masuk Siswa
+          </a>
+          <a href="#masuk-portal" class="btn-lp btn-lp-netral" onclick="pilihTabPeran('guru')">
+            👨‍🏫 Masuk Staf
+          </a>
+        <% } %>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section Ceria -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-badge">
+          <span>✨</span> Petualangan Belajar Kosa Kata SD Paling Seru!
+        </div>
+
+        <h1 class="hero-title">
+          Belajar Bahasa Inggris <span class="sorot">Jadi Super Asik!</span> 🎈
+        </h1>
+        <p class="hero-desc">
+          Kenali benda-benda seru di sekitarmu! Dengar pelafalan asli bahasa Inggris lewat suara ceria, tebak gambar kuis berhadiah bintang, dan kumpulkan poin kejuaraan bersama maskot Kiko! 🐱⭐
+        </p>
+
+        <div class="hero-actions">
+          <% if (userAktif) { %>
+            <a href="<%= url(tujuan[roleAktif] || 'index.php') %>" class="btn-lp btn-lp-utama" style="font-size:18px; padding:14px 28px;">
+              🚀 Lanjut Belajar (<%= userAktif.nama %>)
+            </a>
+          <% } else { %>
+            <a href="#masuk-portal" class="btn-lp btn-lp-utama" onclick="pilihTabPeran('siswa')" style="font-size:18px; padding:14px 28px;">
+              🚀 Mulai Belajar Sekarang!
+            </a>
+            <a href="#masuk-portal" class="btn-lp btn-lp-netral" onclick="pilihTabPeran('guru')">
+              👨‍🏫 Ruang Guru & Staf
+            </a>
+          <% } %>
+        </div>
+      </div>
+
+      <!-- Kartu Interaktif Hero -->
+      <div>
+        <div class="hero-card-box">
+          <div class="hero-card-tag">⭐ Kartu Belajar Ceria</div>
+          <div class="hero-card-img-wrap">
+            <img id="heroImg" src="<%= url('assets/img/contoh/apple.svg') %>" alt="Apple" class="hero-card-img">
+          </div>
+          <div class="hero-word-title" id="heroWord">APPLE</div>
+          <div class="hero-word-arti" id="heroArti">Arti: <strong>Apel</strong></div>
+          <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+            <button class="btn-lp btn-lp-hijau" type="button" onclick="playVoiceHero()">
+              <span style="font-size:20px;">🔊</span> Bunyikan Suara
+            </button>
+            <button class="btn-lp btn-lp-aksen" type="button" onclick="gantiKartuHero()">
+              Ganti Gambar &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PINTU MASUK / PORTAL LOGIN ==================== -->
+  <section class="section" id="masuk-portal" style="background: var(--latar);">
+    <div class="container" style="max-width: 560px;">
+      <div class="section-header" style="margin-bottom: 22px;">
+        <span class="section-kategori">Gerbang Masuk</span>
+        <h2 class="section-title">Pintu Masuk Belajar & Staf 🏫</h2>
+        <p class="section-desc">Pilih peranmu untuk memulai petualangan belajar atau masuk ke ruang staf.</p>
+      </div>
+
+      <div class="card-siswa" style="text-align: left; background: var(--permukaan); padding: 24px; border: 3px solid var(--border-komik); border-radius: 20px; box-shadow: 0 8px 0 var(--garis-tebal);">
+        <!-- Tab Bar Pilihan Peran -->
+        <div class="tab-peran-bar" role="tablist">
+          <button type="button" role="tab" class="tab-peran-btn <%= tab === 'siswa' ? 'aktif' : '' %>" id="btnPageTabSiswa" onclick="pilihTabPeran('siswa')">🎒 Siswa</button>
+          <button type="button" role="tab" class="tab-peran-btn <%= tab === 'guru' ? 'aktif' : '' %>" id="btnPageTabGuru" onclick="pilihTabPeran('guru')">👩‍🏫 Guru</button>
+          <button type="button" role="tab" class="tab-peran-btn <%= tab === 'kepsek' ? 'aktif' : '' %>" id="btnPageTabKepsek" onclick="pilihTabPeran('kepsek')">👔 Kepsek</button>
+          <button type="button" role="tab" class="tab-peran-btn <%= tab === 'operator' ? 'aktif' : '' %>" id="btnPageTabOperator" onclick="pilihTabPeran('operator')">⚙️ Operator</button>
+        </div>
+
+        <% if (habis) { %>
+          <div class="pesan galat">⚠️ Sesi berakhir karena tidak aktif. Silakan masuk kembali.</div>
+        <% } %>
+
+        <% if (galat) { %>
+          <div class="pesan galat">⚠️ <%= galat %></div>
+        <% } %>
+
+        <!-- PANEL SISWA -->
+        <div id="panel-siswa" class="portal-panel <%= tab === 'siswa' ? 'aktif' : '' %>">
+          <% if (!kelas) { %>
+            <form method="post" action="<%= url('index.php') %>#masuk-portal" autocomplete="off" class="siswa-zona" style="text-align:center;">
+              <%- csrfFieldHtml %>
+              <input type="hidden" name="peran" value="siswa">
+              <input type="hidden" name="aksi" value="kode">
+
+              <img src="<%= url('assets/img/kiko.svg') %>" alt="Kiko" style="width:75px; height:75px; margin:0 auto 6px; display:block;">
+              <p style="font-size:15px; font-weight:700; color:#475569; margin:0 0 10px;">
+                Halo Teman Pintar! Masukkan kode kelas yang diberikan oleh gurumu ya:
+              </p>
+
+              <label for="kode" style="font-size: 16px; font-weight: 800; display: block; margin-bottom: 4px; text-align:center;">Kode Kelas</label>
+              <input type="text" id="kode" name="kode" maxlength="10" value="<%= kodeIsi || 'KLS4A' %>" placeholder="contoh: KLS4A" style="text-transform:uppercase; font-size: 24px; text-align: center; font-weight: 900; max-width:220px; min-height: 50px; letter-spacing:0.1em; margin:0 auto 8px; display:block;" required>
+              <p class="bantu" style="font-size:12px; margin-bottom:14px; text-align:center;">
+                Pilihan kode kelas aktif: <strong><%= kodeAktif.join(', ') %></strong>
+              </p>
+
+              <button class="btn-siswa btn-siswa-aksen" type="submit" style="width:100%; font-size:17px; padding:12px; margin-bottom:0;">
+                🚀 Masuk ke Kelasku!
+              </button>
+            </form>
+          <% } else { %>
+            <div class="siswa-zona">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 14px; border-bottom: 2.5px solid var(--garis); padding-bottom: 8px;">
+                <strong style="font-size: 20px; color:var(--warna-utama);"><%= kelas.nama_kelas %></strong>
+                <span class="stiker-badge" style="margin:0; font-size:13px;">Kode: <%= kelas.kode_kelas %></span>
+              </div>
+
+              <% if (!daftarSiswa.length) { %>
+                <p class="bantu">Belum ada siswa terdaftar di kelas ini. Hubungi gurumu ya.</p>
+              <% } else { %>
+                <form method="post" action="<%= url('index.php') %>#masuk-portal" autocomplete="off">
+                  <%- csrfFieldHtml %>
+                  <input type="hidden" name="peran" value="siswa">
+                  <input type="hidden" name="aksi" value="masuk_siswa">
+
+                  <label style="font-size: 17px;">👤 Siapa Namamu?</label>
+                  <div style="display:grid; gap:8px; max-height: 180px; overflow-y: auto; margin-bottom: 14px; padding-right:4px;">
+                    <% daftarSiswa.forEach((s, idx) => { %>
+                      <label style="display:flex; align-items:center; gap:10px; margin:0; padding:10px 14px; border:2.5px solid var(--border-komik); border-radius:14px; cursor:pointer; font-size:17px; font-weight:700; background:#FFFFFF;">
+                        <input type="radio" name="nisn" value="<%= s.nisn %>" <%= (postValues.nisn === s.nisn || (!postValues.nisn && idx === 0)) ? 'checked' : '' %> style="width:20px; height:20px; accent-color:var(--warna-utama);" required>
+                        <span>👦 <%= s.nama %> (<%= s.poin %> ⭐)</span>
+                      </label>
+                    <% }) %>
+                  </div>
+
+                  <label for="pin" style="font-size: 17px; text-align:center;">🔑 PIN Rahasia (4 Angka)</label>
+                  <input type="password" id="pin" name="pin" inputmode="numeric" pattern="\d{4}" maxlength="4" placeholder="••••" style="text-align:center; font-size: 30px; letter-spacing: 0.4em; font-weight:900; background:#FFFBEB; margin-bottom:12px;" required>
+
+                  <div class="pin-pad-siswa">
+                    <% for (let i = 1; i <= 9; i++) { %>
+                      <button type="button" class="btn-pin-angka" onclick="ketikPin('<%= i %>')"><%= i %></button>
+                    <% } %>
+                    <button type="button" class="btn-pin-angka btn-pin-hapus" onclick="hapusPin()">⌫</button>
+                    <button type="button" class="btn-pin-angka" onclick="ketikPin('0')">0</button>
+                    <button type="button" class="btn-pin-angka btn-pin-clear" onclick="clearPin()">C</button>
+                  </div>
+
+                  <button class="btn-siswa btn-siswa-aksen" type="submit" style="margin-top: 14px;">
+                    🚀 Mulai Belajar Sekarang!
+                  </button>
+                </form>
+              <% } %>
+
+              <form method="post" action="<%= url('index.php') %>#masuk-portal" style="margin-top: 10px; text-align:center;">
+                <%- csrfFieldHtml %>
+                <input type="hidden" name="peran" value="siswa">
+                <input type="hidden" name="aksi" value="ganti_kelas">
+                <button class="btn-staf btn-staf-netral" type="submit" style="font-size:14px;">&larr; Ganti Kode Kelas</button>
+              </form>
+            </div>
+          <% } %>
+        </div>
+
+        <!-- PANEL STAF (GURU, KEPSEK, OPERATOR) -->
+        <% [
+          { key: 'guru', label: 'Guru Pengampu', contohUser: 'guru_ratna' },
+          { key: 'kepsek', label: 'Kepala Sekolah', contohUser: 'kepsek_sulaiman' },
+          { key: 'operator', label: 'Operator Sekolah', contohUser: 'admin_sekolah' }
+        ].forEach((st) => { %>
+          <div id="panel-<%= st.key %>" class="portal-panel <%= tab === st.key ? 'aktif' : '' %>">
+            <h3 style="margin:0 0 8px; font-size:1.25rem; font-weight:800; color:var(--teks);">
+              Masuk sebagai <%= st.label %>
+            </h3>
+
+            <form method="post" action="<%= url('index.php') %>#masuk-portal" autocomplete="off">
+              <%- csrfFieldHtml %>
+              <input type="hidden" name="peran" value="<%= st.key %>">
+              <input type="hidden" name="aksi" value="staf">
+
+              <label for="username-<%= st.key %>">Username *</label>
+              <input type="text" id="username-<%= st.key %>" name="username" maxlength="50" value="<%= tab === st.key ? (postValues.username || '') : '' %>" placeholder="contoh: <%= st.contohUser %>" style="font-size:15px;" required>
+
+              <label for="sandi-<%= st.key %>" style="margin-top:10px;">Kata Sandi *</label>
+              <input type="password" id="sandi-<%= st.key %>" name="sandi" placeholder="Masukkan kata sandi..." style="font-size:15px;" required>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; margin:8px 0 14px;">
+                <label style="display:flex; align-items:center; gap:6px; font-size:13px; font-weight:700; cursor:pointer; margin:0;">
+                  <input type="checkbox" onchange="var p=document.getElementById('sandi-<%= st.key %>'); p.type = this.checked ? 'text' : 'password';" style="width:16px; height:16px;"> 👁️ Lihat Sandi
+                </label>
+              </div>
+
+              <button type="submit" class="btn-staf" style="width:100%; padding:12px; font-size:16px;">
+                Masuk Sekarang &rarr;
+              </button>
+            </form>
+
+            <div style="margin-top:14px; background:#FFFBEB; border:2px solid #FDE68A; border-radius:12px; padding:10px; font-size:13px;">
+              <div style="font-weight:800; color:#B45309; margin-bottom:4px;">💡 Akun Contoh <%= st.label %>:</div>
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                <div style="color:#334155;">
+                  <code><%= st.contohUser %></code> / <code>password123</code>
+                </div>
+                <button type="button" class="btn-staf btn-staf-netral" style="padding:4px 8px; font-size:12px;" onclick="isiOtomatisStaf('<%= st.key %>', '<%= st.contohUser %>', 'password123')">
+                  ⚡ Isi Otomatis
+                </button>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fitur -->
+  <section class="section" id="fitur">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kategori">Fitur Pembelajaran</span>
+        <h2 class="section-title">Apa Saja yang Bisa Kamu Lakukan? 🌟</h2>
+        <p class="section-desc">Dirancang khusus dengan aktivitas ramah anak yang menyenangkan dan memotivasi belajar.</p>
+      </div>
+
+      <div class="fitur-grid">
+        <div class="fitur-item">
+          <div class="fitur-icon-box">📖</div>
+          <h3>Mode Belajar Kartu Kata</h3>
+          <p>Buka kartu kosa kata bergambar kartun ceria, pelajari artinya dalam bahasa Indonesia, dan dengarkan pelafalan bahasa Inggris aslinya.</p>
+        </div>
+
+        <div class="fitur-item">
+          <div class="fitur-icon-box">🎮</div>
+          <h3>Mode Mencocokkan Kuis</h3>
+          <p>Latihan tebak kata seru! Cocokkan gambar benda dengan pilihan kata yang benar. Dapatkan suara melodi gembira saat jawabanmu tepat!</p>
+        </div>
+
+        <div class="fitur-item">
+          <div class="fitur-icon-box">⭐</div>
+          <h3>Tabungan Poin & Bintang</h3>
+          <p>Kumpulkan poin bintang dari setiap jawaban kuis yang benar dan lihat riwayat capaian belajarmu di buku nilai pribadi.</p>
+        </div>
+
+        <div class="fitur-item">
+          <div class="fitur-icon-box">🏫</div>
+          <h3>Pemantauan Guru & Kepsek</h3>
+          <p>Guru dengan mudah mengelola materi soal dan nilai kelas; Kepala Sekolah memantau peringkat siswa dan capaian seluruh kelas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cara Kerja -->
+  <section class="section" id="cara-kerja" style="background: var(--permukaan);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kategori">Petualangan Belajar</span>
+        <h2 class="section-title">Cara Kerja Petualangan Belajar 🗺️</h2>
+        <p class="section-desc">Empat langkah mudah dari kelas sekolah hingga menjadi juara kosa kata!</p>
+      </div>
+
+      <div class="langkah-grid">
+        <div class="langkah-item">
+          <div class="langkah-nomor">1</div>
+          <h4>Operator Siapkan Data</h4>
+          <p>Operator sekolah mendaftarkan data Guru, Siswa, Kepala Sekolah, dan Kelas secara tertib.</p>
+        </div>
+
+        <div class="langkah-item">
+          <div class="langkah-nomor">2</div>
+          <h4>Guru Buat Materi Soal</h4>
+          <p>Bapak/Ibu guru memasukkan soal kosa kata bergambar dan artinya sesuai tema pelajaran.</p>
+        </div>
+
+        <div class="langkah-item">
+          <div class="langkah-nomor">3</div>
+          <h4>Siswa Belajar & Main</h4>
+          <p>Siswa masuk memakai kode kelas dan PIN 4 angka, belajar kartu kata lalu bermain kuis berpoin.</p>
+        </div>
+
+        <div class="langkah-item">
+          <div class="langkah-nomor">4</div>
+          <h4>Pantau & Rayakan!</h4>
+          <p>Guru dan Kepala Sekolah melihat grafik nilai dan merayakan siswa dengan bintang tertinggi!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Untuk Siapa -->
+  <section class="section" id="untuk-siapa">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kategori">Hak Akses Pengguna</span>
+        <h2 class="section-title">Untuk Siapa Aplikasi Ini Dibuat? 👥</h2>
+        <p class="section-desc">Setiap pengguna memiliki ruang dan fitur yang disesuaikan dengan perannya.</p>
+      </div>
+
+      <div class="peran-grid">
+        <div class="peran-item">
+          <div class="peran-badge-tag">🎒 Siswa SD</div>
+          <h3>Siswa Sekolah Dasar</h3>
+          <p>Untuk siswa kelas 1 s.d. 6 SD (usia 6-12 tahun).</p>
+          <ul>
+            <li>Login mudah pakai kode kelas & PIN 4 angka</li>
+            <li>Mode Belajar kartu kata bergambar</li>
+            <li>Mode Mencocokkan kuis berhadiah poin</li>
+            <li>Melihat koleksi bintang dan poin sendiri</li>
+          </ul>
+        </div>
+
+        <div class="peran-item">
+          <div class="peran-badge-tag">👩‍🏫 Guru Kelas</div>
+          <h3>Bapak / Ibu Guru</h3>
+          <p>Guru pengampu mata pelajaran bahasa Inggris.</p>
+          <ul>
+            <li>Melihat daftar kelas yang diampu</li>
+            <li>Melihat data siswa, perolehan poin & PIN siswa</li>
+            <li>Menambah, mengedit, dan menghapus soal kuis</li>
+            <li>Cetak rekap nilai kelas</li>
+          </ul>
+        </div>
+
+        <div class="peran-item">
+          <div class="peran-badge-tag">👔 Pimpinan</div>
+          <h3>Kepala Sekolah</h3>
+          <p>Pemantau eksekutif sekolah secara terpadu.</p>
+          <ul>
+            <li>Melihat data capaian seluruh kelas</li>
+            <li>Melihat podium siswa dengan poin tertinggi</li>
+            <li>Melihat data guru pengampu mata pelajaran</li>
+          </ul>
+        </div>
+
+        <div class="peran-item">
+          <div class="peran-badge-tag">⚙️ Administrator</div>
+          <h3>Operator Sekolah</h3>
+          <p>Pengelola data induk sekolah.</p>
+          <ul>
+            <li>Kelola akun Guru, Siswa, Kepala Sekolah</li>
+            <li>Kelola data Kelas dan Operator</li>
+            <li>Muat data contoh awal untuk uji coba</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pratinjau Tampilan -->
+  <section class="section" id="mockup" style="background: var(--permukaan);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kategori">Pratinjau Antarmuka</span>
+        <h2 class="section-title">Tampilan Ramah di Laptop & Smartphone 📱💻</h2>
+        <p class="section-desc">Didesain responsif dengan tombol besar dan gambar jelas agar nyaman di semua perangkat.</p>
+      </div>
+
+      <div class="mockup-wrap">
+        <div class="mockup-kotak">
+          <div class="mockup-header-top">
+            <span class="mockup-dot red"></span>
+            <span class="mockup-dot yellow"></span>
+            <span class="mockup-dot green"></span>
+            <div class="mockup-judul">Tampilan Laptop (Menu Guru & Kelas)</div>
+          </div>
+          <div style="background:#F8FAFC; border:2px solid var(--border-komik); border-radius:14px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:2px solid var(--garis); padding-bottom:8px;">
+              <strong style="font-size:18px;">Kelas 4A (KLS4A)</strong>
+              <span class="stiker-badge" style="margin:0; font-size:13px;">3 Siswa Terdaftar</span>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <span class="btn-staf btn-staf-netral" style="padding:6px 14px; font-size:13px;">👥 Data Siswa</span>
+              <span class="btn-staf" style="padding:6px 14px; font-size:13px;">📝 Kelola Soal</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mockup-kotak">
+          <div class="mockup-header-top">
+            <span class="mockup-dot red"></span>
+            <span class="mockup-dot yellow"></span>
+            <span class="mockup-dot green"></span>
+            <div class="mockup-judul">Tampilan Ponsel (Kuis Siswa)</div>
+          </div>
+          <div style="background:#FFFDF7; border:2px solid var(--border-komik); border-radius:14px; padding:14px; text-align:center;">
+            <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:800; margin-bottom:8px;">
+              <span class="stiker-badge" style="margin:0; font-size:11px;">Soal 1 / 10</span>
+              <span style="color:#D97706;">⭐ Poin: 0</span>
+            </div>
+            <div style="width:70px; height:70px; margin:4px auto 10px; background:#F0FDF4; border:2px solid var(--border-komik); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:28px;">
+              📖
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+              <div style="padding:8px; border:2px solid var(--border-komik); border-radius:10px; font-size:13px; font-weight:800; background:#FFF;">A. BOOK</div>
+              <div style="padding:8px; border:2px solid var(--border-komik); border-radius:10px; font-size:13px; font-weight:800; background:#FFF;">B. APPLE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kategori">Bantuan</span>
+        <h2 class="section-title">Pertanyaan yang Sering Diajukan (FAQ) 💬</h2>
+        <p class="section-desc">Jawaban singkat untuk pertanyaan umum bapak/ibu guru dan wali murid.</p>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-kotak" open>
+          <summary>Apakah perlu mengunduh aplikasi di Play Store / App Store?</summary>
+          <p>Tidak perlu! Aplikasi ini berbasis web modern (Web App) yang dapat dibuka langsung lewat peramban Google Chrome atau Microsoft Edge di Android maupun laptop Windows.</p>
+        </details>
+
+        <details class="faq-kotak">
+          <summary>Apakah siswa bisa mendaftar akun sendiri?</summary>
+          <p>Demi ketertiban data sekolah dan keamanan siswa, akun dibuatkan oleh Operator sekolah. Siswa cukup memasukkan kode kelas dan PIN 4 digit untuk belajar.</p>
+        </details>
+
+        <details class="faq-kotak">
+          <summary>Bagaimana jika siswa lupa nomor PIN rahasianya?</summary>
+          <p>Bapak/Ibu guru pengampu kelas dapat melihat dan membantu memberitahukan PIN siswa melalui menu "Data Siswa" di akun Guru masing-masing.</p>
+        </details>
+
+        <details class="faq-kotak">
+          <summary>Bagaimana jika suara pelafalan tidak berbunyi?</summary>
+          <p>Pastikan volume perangkat Anda sudah aktif dan peramban Anda telah mengizinkan audio. Disarankan menggunakan peramban Google Chrome untuk kualitas pelafalan Web Speech API terbaik.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="lp-footer">
+    <div class="container footer-bar">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <img src="<%= url('assets/img/logo.svg') %>" alt="Logo" style="width:30px; height:30px;">
+        <strong><%= config.namaAplikasi %></strong> &middot; <%= config.namaSekolah %>
+      </div>
+      <div>
+        &copy; <%= tahun %> Kerja Praktik (KPku) &middot; Dibuat dengan Kasih Sayang untuk Siswa SD ❤️
+      </div>
+    </div>
+  </footer>
+
+  <script src="<%= url('assets/js/efek.js') %>"></script>
+  <script>
+    var heroItems = [
+      { kata: 'APPLE', arti: 'Apel', gambar: '<%= url("assets/img/contoh/apple.svg") %>' },
+      { kata: 'BOOK', arti: 'Buku', gambar: '<%= url("assets/img/contoh/book.svg") %>' },
+      { kata: 'BALL', arti: 'Bola', gambar: '<%= url("assets/img/contoh/ball.svg") %>' },
+      { kata: 'PENCIL', arti: 'Pensil', gambar: '<%= url("assets/img/contoh/pencil.svg") %>' }
+    ];
+    var heroIdx = 0;
+
+    function gantiKartuHero() {
+      heroIdx = (heroIdx + 1) % heroItems.length;
+      var item = heroItems[heroIdx];
+      document.getElementById('heroImg').src = item.gambar;
+      document.getElementById('heroWord').textContent = item.kata;
+      document.getElementById('heroArti').innerHTML = 'Arti: <strong>' + item.arti + '</strong>';
+      if (window.KuisEfek) window.KuisEfek.suara.klik();
+    }
+
+    function playVoiceHero() {
+      var item = heroItems[heroIdx];
+      playVoice(item.kata);
+      if (window.KuisEfek) window.KuisEfek.suara.benar();
+    }
+
+    function playVoice(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        var u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US';
+        u.rate = 0.85;
+        window.speechSynthesis.speak(u);
+      }
+    }
+
+    function pilihTabPeran(peranId) {
+      var tabs = ['siswa', 'guru', 'kepsek', 'operator'];
+      tabs.forEach(function (t) {
+        var btn = document.getElementById('btnPageTab' + t.charAt(0).toUpperCase() + t.slice(1));
+        var panel = document.getElementById('panel-' + t);
+        if (btn) btn.classList.toggle('aktif', t === peranId);
+        if (panel) panel.classList.toggle('aktif', t === peranId);
+      });
+      if (window.KuisEfek) window.KuisEfek.suara.klik();
+    }
+
+    function isiOtomatisStaf(key, u, p) {
+      var eu = document.getElementById('username-' + key);
+      var ep = document.getElementById('sandi-' + key);
+      if (eu) eu.value = u;
+      if (ep) ep.value = p;
+      if (window.KuisEfek) window.KuisEfek.suara.klik();
+    }
+
+    function ketikPin(n) {
+      var p = document.getElementById('pin');
+      if (p && p.value.length < 4) {
+        p.value += n;
+        if (window.KuisEfek) window.KuisEfek.suara.klik();
+      }
+    }
+    function hapusPin() {
+      var p = document.getElementById('pin');
+      if (p) {
+        p.value = p.value.slice(0, -1);
+        if (window.KuisEfek) window.KuisEfek.suara.klik();
+      }
+    }
+    function clearPin() {
+      var p = document.getElementById('pin');
+      if (p) {
+        p.value = '';
+        if (window.KuisEfek) window.KuisEfek.suara.klik();
+      }
+    }
+  </script>
+</body>
+</html>

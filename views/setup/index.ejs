@@ -1,0 +1,42 @@
+<%- include('../partials/header') %>
+<% if (ada > 0 && !info) { %>
+  <div class="card-staf" style="max-width:500px; margin:40px auto; text-align:center;">
+    <h2 style="margin-top:0;">Setup Sudah Selesai</h2>
+    <p class="bantu">Operator pertama sudah dibuat dan sistem siap digunakan.</p>
+    <a class="btn-staf" href="<%= url('index.php') %>">Ke Halaman Masuk</a>
+  </div>
+<% } else { %>
+  <div class="card-staf" style="max-width:500px; margin:30px auto;">
+    <h1 style="margin:0 0 12px; font-size:1.4rem;">Setup Operator Pertama</h1>
+    <p class="bantu">Buat akun pengelola utama sistem sekolah.</p>
+
+    <% if (info) { %>
+      <div class="pesan sukses">Berhasil: <%= info %></div>
+      <a class="btn-staf" href="<%= url('index.php') %>">Ke Halaman Masuk</a>
+    <% } else { %>
+      <% if (galat) { %>
+        <div class="pesan galat">Galat: <%= galat %></div>
+      <% } %>
+
+      <form method="post" action="<%= url('setup/index.php') %>" autocomplete="off">
+        <%- csrfFieldHtml %>
+        <label for="nama">Nama Lengkap</label>
+        <input type="text" id="nama" name="nama" maxlength="100" required autofocus>
+
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" maxlength="50" required>
+
+        <label for="password">Sandi (minimal 8 karakter)</label>
+        <input type="password" id="password" name="password" autocomplete="new-password" required>
+
+        <label for="ulang">Ulangi Sandi</label>
+        <input type="password" id="ulang" name="ulang" autocomplete="new-password" required>
+
+        <p style="margin-top:20px;">
+          <button class="btn-staf" type="submit" style="width:100%;">Buat Operator</button>
+        </p>
+      </form>
+    <% } %>
+  </div>
+<% } %>
+<%- include('../partials/footer') %>

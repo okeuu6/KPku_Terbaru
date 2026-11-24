@@ -1,0 +1,42 @@
+<%- include('../partials/header') %>
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+  <div>
+    <h1 style="margin:0; font-size:1.5rem;">Data Seluruh Kelas</h1>
+    <p class="bantu">Pemantauan kelas dan guru pengampu.</p>
+  </div>
+  <div>
+    <button class="btn-staf btn-staf-netral" onclick="window.print()" type="button">
+      Cetak
+    </button>
+  </div>
+</div>
+
+<div class="card-staf">
+  <% if (!rows.length) { %>
+    <p class="bantu">Data kelas masih kosong.</p>
+  <% } else { %>
+    <div class="tabel-staf-bungkus">
+      <table class="tabel-staf">
+        <thead>
+          <tr>
+            <th>Kelas</th>
+            <th>Guru Pengampu</th>
+            <th style="text-align:right;">Jumlah Siswa</th>
+            <th style="text-align:center;">Kode Kelas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% rows.forEach((r) => { %>
+            <tr>
+              <td><strong><%= r.nama_kelas %></strong></td>
+              <td><%= r.guru %></td>
+              <td style="text-align:right;"><%= Number(r.jml) %></td>
+              <td style="text-align:center; font-family:monospace; font-weight:700;"><%= r.kode_kelas %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</div>
+<%- include('../partials/footer') %>

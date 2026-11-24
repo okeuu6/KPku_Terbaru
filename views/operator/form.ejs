@@ -1,0 +1,74 @@
+<%- include('../partials/header') %>
+<% const val = (k) => v[k] ?? ''; %>
+<div class="card-staf" style="max-width:540px; margin:0 auto;">
+  <h1 style="margin:0 0 14px; font-size:1.4rem;"><%= row ? 'Ubah' : 'Tambah' %> <%= cfg.satu.charAt(0).toUpperCase() + cfg.satu.slice(1) %></h1>
+
+  <% if (galat) { %>
+    <div class="pesan galat">Galat: <%= galat %></div>
+  <% } %>
+
+  <form method="post" action="<%= url('operator/form.php?jenis=' + jenis + (id ? '&id=' + encodeURIComponent(String(id)) : '')) %>" autocomplete="off">
+    <%- csrfFieldHtml %>
+    <input type="hidden" name="jenis" value="<%= jenis %>">
+    <input type="hidden" name="id" value="<%= id %>">
+
+    <% if (jenis === 'siswa') { %>
+      <label for="nisn">NISN</label>
+      <input type="text" id="nisn" name="nisn" maxlength="10" inputmode="numeric" value="<%= val('nisn') %>" <%= row ? 'readonly' : 'required' %>>
+
+      <label for="nama">Nama Siswa</label>
+      <input type="text" id="nama" name="nama" maxlength="100" value="<%= val('nama') %>" required>
+
+      <label for="id_kelas">Kelas</label>
+      <select id="id_kelas" name="id_kelas" required>
+        <option value="">-- Pilih kelas --</option>
+        <% kelasL.forEach((k) => { %>
+          <option value="<%= Number(k.id_kelas) %>" <%= String(v.id_kelas ?? '') === String(k.id_kelas) ? 'selected' : '' %>><%= k.nama_kelas %></option>
+        <% }) %>
+      </select>
+      <% if (!kelasL.length) { %><p class="bantu">Belum ada kelas. Tambahkan kelas terlebih dahulu.</p><% } %>
+
+      <label for="pin">Sandi / PIN (4 angka)</label>
+      <input type="text" id="pin" name="pin" maxlength="4" inputmode="numeric" placeholder="<%= row ? 'Kosongkan jika tidak diubah' : '' %>" <%= row ? '' : 'required' %>>
+
+    <% } else if (jenis === 'kelas') { %>
+      <label for="nama_kelas">Nama Kelas</label>
+      <input type="text" id="nama_kelas" name="nama_kelas" maxlength="50" value="<%= val('nama_kelas') %>" placeholder="contoh: Kelas 4A" required>
+
+      <label for="kode_kelas">Kode Kelas</label>
+      <input type="text" id="kode_kelas" name="kode_kelas" maxlength="10" value="<%= val('kode_kelas') %>" placeholder="contoh: KLS4A" style="text-transform:uppercase" required>
+
+      <label for="id_guru">Guru Pengampu</label>
+      <select id="id_guru" name="id_guru" required>
+        <option value="">-- Pilih guru --</option>
+        <% gurus.forEach((g) => { %>
+          <option value="<%= Number(g.id_guru) %>" <%= String(v.id_guru ?? '') === String(g.id_guru) ? 'selected' : '' %>><%= g.nama %></option>
+        <% }) %>
+      </select>
+
+      <label for="id_kepsek">Kepala Sekolah (pemantau)</label>
+      <select id="id_kepsek" name="id_kepsek">
+        <option value="0">-- Tidak diatur --</option>
+        <% kepseks.forEach((g) => { %>
+          <option value="<%= Number(g.id_kepsek) %>" <%= String(v.id_kepsek ?? '') === String(g.id_kepsek) ? 'selected' : '' %>><%= g.nama %></option>
+        <% }) %>
+      </select>
+
+    <% } else { %>
+      <label for="nama">Nama</label>
+      <input type="text" id="nama" name="nama" maxlength="100" value="<%= val('nama') %>" required>
+
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" maxlength="50" value="<%= val('username') %>" required>
+
+      <label for="password">Sandi</label>
+      <input type="password" id="password" name="password" autocomplete="new-password" placeholder="<%= row ? 'Kosongkan jika tidak diubah' : 'Minimal 8 karakter' %>" <%= row ? '' : 'required' %>>
+    <% } %>
+
+    <div style="display:flex; gap:10px; margin-top:20px;">
+      <button class="btn-staf" type="submit">Simpan</button>
+      <a class="btn-staf btn-staf-netral" href="<%= url('operator/daftar.php?jenis=' + jenis) %>">Batal</a>
+    </div>
+  </form>
+</div>
+<%- include('../partials/footer') %>

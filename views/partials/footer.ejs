@@ -1,0 +1,11 @@
+    </main>
+  </div>
+  <footer class="kaki">
+    &copy; <%= tahun %> <%= config.namaAplikasi %> &middot; <%= config.namaSekolah %>
+  </footer>
+  <script src="<%= url('assets/js/efek.js') %>"></script>
+  <% (jsFiles || []).forEach((s) => { %>
+    <script src="<%= url('assets/js/' + s) %>"></script>
+  <% }) %>
+</body>
+</html>

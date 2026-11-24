@@ -1,0 +1,116 @@
+<%- include('../partials/header') %>
+<div class="staf-banner">
+  <div>
+    <div class="stiker-badge" style="margin-bottom:8px; background:#FEF08A;">👔 Pemantauan Eksekutif &middot; Hanya Lihat</div>
+    <h1>Dashboard Kepala Sekolah 🏫</h1>
+    <p>Ringkasan data pembelajaran, podium juara siswa, dan capaian seluruh kelas sekolah dasar.</p>
+  </div>
+  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+    <a class="btn-staf btn-staf-aksen" href="<%= url('kepsek/poin-tertinggi.php') %>">📊 Laporan Lengkap</a>
+    <button class="btn-staf btn-staf-netral" onclick="window.print()" type="button">🖨️ Cetak</button>
+  </div>
+</div>
+
+<div class="grid empat" style="margin-bottom:22px;">
+  <div class="stat-card-staf aksen-oranye">
+    <div class="stat-card-icon">🎒</div>
+    <div class="stat-card-angka"><%= js %></div>
+    <div class="stat-card-label">Total Siswa Aktif</div>
+    <a class="btn-staf btn-staf-aksen" href="<%= url('kepsek/poin-tertinggi.php') %>" style="width:100%;">
+      📊 Tabel Nilai
+    </a>
+  </div>
+
+  <div class="stat-card-staf aksen-biru">
+    <div class="stat-card-icon">🏫</div>
+    <div class="stat-card-angka"><%= jk %></div>
+    <div class="stat-card-label">Data Seluruh Kelas</div>
+    <a class="btn-staf" href="<%= url('kepsek/data-kelas.php') %>" style="width:100%;">
+      🏫 Data Kelas
+    </a>
+  </div>
+
+  <div class="stat-card-staf aksen-hijau">
+    <div class="stat-card-icon">👩‍🏫</div>
+    <div class="stat-card-angka"><%= jg %></div>
+    <div class="stat-card-label">Guru Pengampu</div>
+    <a class="btn-staf" href="<%= url('kepsek/nama-guru.php') %>" style="width:100%;">
+      👩‍🏫 Data Guru
+    </a>
+  </div>
+
+  <div class="stat-card-staf aksen-ungu">
+    <div class="stat-card-icon">📖</div>
+    <div class="stat-card-angka"><%= jq %></div>
+    <div class="stat-card-label">Materi Kosa Kata</div>
+    <a class="btn-staf btn-staf-netral" href="<%= url('kepsek/data-kelas.php') %>" style="width:100%;">
+      🔍 Lihat Sebaran
+    </a>
+  </div>
+</div>
+
+<div class="grid dua">
+  <!-- Podium Juara 3 Besar -->
+  <div class="card-staf">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+      <h2 style="margin:0; font-size:1.25rem; font-weight:800;">🏆 Podium Juara Poin Tertinggi</h2>
+      <span class="stiker-badge" style="margin:0; font-size:12px;">3 Besar</span>
+    </div>
+    <p class="bantu" style="margin-top:0;">Siswa dengan perolehan bintang kuis tertinggi di sekolah.</p>
+
+    <% if (!top3.length) { %>
+      <p class="bantu">Belum ada data siswa.</p>
+    <% } else { %>
+      <div class="podium-wrap">
+        <% top3.forEach((s, idx) => {
+          const rank = idx + 1;
+          const medal = rank === 1 ? '🥇' : (rank === 2 ? '🥈' : '🥉');
+        %>
+          <div class="podium-item juara-<%= rank %>">
+            <div class="podium-avatar"><%= medal %></div>
+            <div class="podium-nama" title="<%= s.nama %>"><%= s.nama %></div>
+            <div class="podium-skor"><%= s.total %> ⭐</div>
+            <div style="font-size:12px; color:var(--teks-muda); font-weight:700;"><%= s.nama_kelas %></div>
+            <div class="podium-balok b-<%= rank %>"><%= rank %></div>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+
+  <!-- Ringkasan Kelas -->
+  <div class="card-staf">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <h2 style="margin:0; font-size:1.25rem; font-weight:800;">🏫 Ringkasan Kelas Sekolah</h2>
+      <a href="<%= url('kepsek/data-kelas.php') %>" style="font-weight:800; font-size:14px;">Lihat Semua &rarr;</a>
+    </div>
+
+    <% if (!kelasRingkas.length) { %>
+      <p class="bantu">Belum ada data kelas.</p>
+    <% } else { %>
+      <div class="tabel-staf-bungkus">
+        <table class="tabel-staf">
+          <thead>
+            <tr>
+              <th>Kelas</th>
+              <th>Kode</th>
+              <th>Guru</th>
+              <th style="text-align:right;">Siswa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% kelasRingkas.forEach((r) => { %>
+              <tr>
+                <td><strong><%= r.nama_kelas %></strong></td>
+                <td style="font-family:monospace; font-weight:700;"><%= r.kode_kelas %></td>
+                <td><%= r.guru %></td>
+                <td style="text-align:right; font-weight:800;"><%= r.jml %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+</div>
+<%- include('../partials/footer') %>

@@ -2,6 +2,7 @@ import path from 'node:path';
 import express from 'express';
 import session from 'express-session';
 import { config } from './src/config.js';
+import { initDb } from './src/db.js';
 import { autoLogoutMiddleware } from './src/helpers.js';
 import authRoutes from './src/routes/auth.js';
 import siswaRoutes from './src/routes/siswa.js';
@@ -68,6 +69,21 @@ app.use((req, res) => {
   );
 });
 
+app.use((err, req, res, _next) => {
+  console.error('[Server Error]', err && err.message ? err.message : err);
+  if (req.path.startsWith('/api/')) {
+    return res.status(500).json({ ok: false, pesan: 'Terjadi kesalahan pada server.' });
+  }
+  res.status(500).send(
+    `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">`
+    + `<body style="font-family:sans-serif;text-align:center;margin-top:60px"><h2>Terjadi kesalahan server</h2>`
+    + `<p>Silakan coba lagi beberapa saat atau periksa koneksi database Anda.</p>`
+    + `<p><a href="/">Kembali ke beranda</a></p></body>`
+  );
+});
+
+await initDb();
+
 app.listen(config.port, '0.0.0.0', () => {
-  console.log(`Media Belajar Inggris SD (KPKu) listening on http://0.0.0.0:${config.port}`);
+  console.log(`Media Belajar Inggris SD (KPKu) listening on http://localhost:${config.port} (0.0.0.0:${config.port})`);
 });

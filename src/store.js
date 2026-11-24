@@ -1,17 +1,16 @@
 import bcrypt from 'bcryptjs';
 import { enkripsiPin } from './crypto.js';
 
-// In-memory store replicating database/kuis_inggris.sql schema
-// Pre-seeded with sample school data so all roles work immediately out-of-the-box.
+// In-memory fallback store mirroring the kuis_inggris schema
+// Used only when MySQL is unreachable (e.g. cloud preview).
 function createSeedData() {
   const staffHash = bcrypt.hashSync('password123', 10);
-  const now = new Date().toISOString();
 
   const operator = [
     {
       id_operator: 1,
-      nama: 'Ahmad Fauzan, S.Kom.',
-      username: 'admin_sekolah',
+      nama: 'Cindy Salsabila',
+      username: 'Cindy',
       password: staffHash,
       dibuat_oleh: null,
     },
@@ -20,8 +19,8 @@ function createSeedData() {
   const kepsek = [
     {
       id_kepsek: 1,
-      nama: 'Dr. H. Sulaiman, M.Pd.',
-      username: 'kepsek_sulaiman',
+      nama: 'Drs. Hendra Wijaya, M.Pd.',
+      username: 'kepsek.hendra',
       password: staffHash,
       dibuat_oleh: 1,
     },
@@ -30,15 +29,15 @@ function createSeedData() {
   const guru = [
     {
       id_guru: 1,
-      nama: 'Ibu Ratna Sari, S.Pd.',
-      username: 'guru_ratna',
+      nama: 'Dewi Anggraini, S.Pd.',
+      username: 'guru.dewi',
       password: staffHash,
       dibuat_oleh: 1,
     },
     {
       id_guru: 2,
-      nama: 'Bapak Hendra Wijaya, M.Pd.',
-      username: 'guru_hendra',
+      nama: 'Bambang Setiawan, S.Pd.',
+      username: 'guru.bambang',
       password: staffHash,
       dibuat_oleh: 1,
     },
@@ -47,43 +46,41 @@ function createSeedData() {
   const kelas = [
     {
       id_kelas: 1,
-      nama_kelas: 'Kelas 4A',
-      kode_kelas: 'KLS4A',
-      id_guru: 1,
-      id_kepsek: 1,
-      dibuat_oleh: 1,
-    },
-    {
-      id_kelas: 2,
-      nama_kelas: 'Kelas 4B',
-      kode_kelas: 'KLS4B',
-      id_guru: 2,
-      id_kepsek: 1,
-      dibuat_oleh: 1,
-    },
-    {
-      id_kelas: 3,
       nama_kelas: 'Kelas 5A',
       kode_kelas: 'KLS5A',
       id_guru: 1,
       id_kepsek: 1,
       dibuat_oleh: 1,
     },
+    {
+      id_kelas: 2,
+      nama_kelas: 'Kelas 5B',
+      kode_kelas: 'KLS5B',
+      id_guru: 2,
+      id_kepsek: 1,
+      dibuat_oleh: 1,
+    },
   ];
 
   const siswaSeeds = [
-    ['0000000001', 'Budi Santoso', '1234', 1],
-    ['0000000002', 'Siti Nurhaliza', '5678', 1],
-    ['0000000003', 'Ahmad Rizki', '1122', 1],
-    ['0000000004', 'Dewi Anggraini', '3344', 2],
-    ['0000000005', 'Fajar Nugraha', '5566', 2],
-    ['0000000006', 'Putri Ayu', '7788', 3],
+    ['0015001001', 'Alya Putri Ramadhani', '1234', 1],
+    ['0015001002', 'Bagas Pratama Putra', '1234', 1],
+    ['0015001003', 'Citra Kirana Sari', '1234', 1],
+    ['0015001004', 'Dimas Aditya Nugroho', '1234', 1],
+    ['0015001005', 'Eka Wulandari', '1234', 1],
+    ['0015002001', 'Fajar Ramadhan Saputra', '1234', 2],
+    ['0015002002', 'Gita Permata Hati', '1234', 2],
+    ['0015002003', 'Hafiz Alfarizi', '1234', 2],
+    ['0015002004', 'Indah Cahaya Lestari', '1234', 2],
+    ['0015002005', 'Joko Susilo Wibowo', '1234', 2],
+    ['0015002006', 'Layla Nur Cahyani', '1234', 2],
   ];
 
+  const siswaHash = bcrypt.hashSync('1234', 10);
   const siswa = siswaSeeds.map(([nisn, nama, pin, id_kelas]) => ({
     nisn,
     nama,
-    sandi_hash: bcrypt.hashSync(pin, 10),
+    sandi_hash: siswaHash,
     sandi_terenkripsi: enkripsiPin(pin),
     id_kelas,
     dibuat_oleh: 1,
@@ -94,16 +91,10 @@ function createSeedData() {
     ['Book', 'Buku', 'contoh/book.svg', 1],
     ['Chair', 'Kursi', 'contoh/chair.svg', 1],
     ['Table', 'Meja', 'contoh/table.svg', 1],
-    ['Ball', 'Bola', 'contoh/ball.svg', 1],
-    ['Pencil', 'Pensil', 'contoh/pencil.svg', 1],
-    ['Bag', 'Tas', 'contoh/bag.svg', 1],
-    ['Clock', 'Jam', 'contoh/clock.svg', 1],
-    ['Apple', 'Apel', 'contoh/apple.svg', 2],
-    ['Book', 'Buku', 'contoh/book.svg', 2],
-    ['Chair', 'Kursi', 'contoh/chair.svg', 2],
-    ['Table', 'Meja', 'contoh/table.svg', 2],
     ['Ball', 'Bola', 'contoh/ball.svg', 2],
     ['Pencil', 'Pensil', 'contoh/pencil.svg', 2],
+    ['Bag', 'Tas', 'contoh/bag.svg', 2],
+    ['Clock', 'Jam', 'contoh/clock.svg', 2],
   ];
 
   const soal = soalSeeds.map(([kata_inggris, arti_indonesia, gambar, id_guru], idx) => ({
@@ -112,16 +103,22 @@ function createSeedData() {
     arti_indonesia,
     gambar,
     id_guru,
-    dibuat_pada: now,
+    dibuat_pada: '2026-11-22T23:46:07.000Z',
     diubah_pada: null,
   }));
 
   const poin = [
-    { id_poin: 1, nisn: '0000000001', nilai: 80, tanggal: new Date(Date.now() - 86400000 * 2).toISOString() },
-    { id_poin: 2, nisn: '0000000002', nilai: 90, tanggal: new Date(Date.now() - 86400000).toISOString() },
-    { id_poin: 3, nisn: '0000000003', nilai: 70, tanggal: new Date(Date.now() - 86400000).toISOString() },
-    { id_poin: 4, nisn: '0000000004', nilai: 80, tanggal: new Date(Date.now() - 86400000).toISOString() },
-    { id_poin: 5, nisn: '0000000006', nilai: 100, tanggal: new Date(Date.now() - 43200000).toISOString() },
+    { id_poin: 1, nisn: '0015001001', nilai: 90, tanggal: '2026-11-22T23:46:07.000Z' },
+    { id_poin: 2, nisn: '0015001002', nilai: 80, tanggal: '2026-11-22T23:46:07.000Z' },
+    { id_poin: 3, nisn: '0015001003', nilai: 100, tanggal: '2026-11-22T23:46:07.000Z' },
+    { id_poin: 4, nisn: '0015001004', nilai: 70, tanggal: '2026-11-22T23:46:07.000Z' },
+    { id_poin: 5, nisn: '0015001005', nilai: 80, tanggal: '2026-11-22T23:46:07.000Z' },
+    { id_poin: 6, nisn: '0015002001', nilai: 85, tanggal: '2026-11-22T23:46:07.000Z' },
+    { id_poin: 7, nisn: '0015002002', nilai: 95, tanggal: '2026-11-22T23:46:07.000Z' },
+    { id_poin: 8, nisn: '0015002003', nilai: 75, tanggal: '2026-11-22T23:46:07.000Z' },
+    { id_poin: 9, nisn: '0015002004', nilai: 90, tanggal: '2026-11-22T23:46:07.000Z' },
+    { id_poin: 10, nisn: '0015002005', nilai: 80, tanggal: '2026-11-22T23:46:07.000Z' },
+    { id_poin: 11, nisn: '0015001001', nilai: 40, tanggal: '2026-11-23T01:00:09.000Z' },
   ];
 
   return {

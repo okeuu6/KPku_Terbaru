@@ -28,12 +28,14 @@
       <h2 style="margin:0; font-size:1.25rem; font-weight:800;">🏫 Ringkasan Kelas &amp; Guru Pengampu</h2>
       <p class="bantu" style="margin:2px 0 0;">Total kosa kata aktif di bank soal: <strong><%= jmlSoal %> kata</strong></p>
     </div>
-    <form method="post" action="<%= url('operator/reset-demo') %>" onsubmit="return confirm('Pulihkan semua master data ke data contoh awal?');">
-      <%- csrfFieldHtml %>
-      <button type="submit" class="btn-staf btn-staf-aksen" style="font-size:14px; padding:8px 14px;">
-        🔄 Pulihkan Data Awal
-      </button>
-    </form>
+    <% if (!isMysql) { %>
+      <form method="post" action="<%= url('operator/reset-demo') %>" onsubmit="return confirm('Pulihkan semua master data ke data contoh awal?');">
+        <%- csrfFieldHtml %>
+        <button type="submit" class="btn-staf btn-staf-aksen" style="font-size:14px; padding:8px 14px;">
+          🔄 Pulihkan Data Awal
+        </button>
+      </form>
+    <% } %>
   </div>
 
   <% if (!kelasRingkas.length) { %>

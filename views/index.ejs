@@ -185,9 +185,9 @@
               </p>
 
               <label for="kode" style="font-size: 16px; font-weight: 800; display: block; margin-bottom: 4px; text-align:center;">Kode Kelas</label>
-              <input type="text" id="kode" name="kode" maxlength="10" value="<%= kodeIsi || 'KLS4A' %>" placeholder="contoh: KLS4A" style="text-transform:uppercase; font-size: 24px; text-align: center; font-weight: 900; max-width:220px; min-height: 50px; letter-spacing:0.1em; margin:0 auto 8px; display:block;" required>
+              <input type="text" id="kode" name="kode" maxlength="10" value="<%= kodeIsi || (kodeAktif[0] || '') %>" placeholder="contoh: <%= kodeAktif[0] || 'KLS5A' %>" style="text-transform:uppercase; font-size: 24px; text-align: center; font-weight: 900; max-width:220px; min-height: 50px; letter-spacing:0.1em; margin:0 auto 8px; display:block;" required>
               <p class="bantu" style="font-size:12px; margin-bottom:14px; text-align:center;">
-                Pilihan kode kelas aktif: <strong><%= kodeAktif.join(', ') %></strong>
+                Pilihan kode kelas aktif: <strong><%= kodeAktif.length ? kodeAktif.join(', ') : 'Belum ada kelas terdaftar' %></strong>
               </p>
 
               <button class="btn-siswa btn-siswa-aksen" type="submit" style="width:100%; font-size:17px; padding:12px; margin-bottom:0;">
@@ -249,9 +249,9 @@
 
         <!-- PANEL STAF (GURU, KEPSEK, OPERATOR) -->
         <% [
-          { key: 'guru', label: 'Guru Pengampu', contohUser: 'guru_ratna' },
-          { key: 'kepsek', label: 'Kepala Sekolah', contohUser: 'kepsek_sulaiman' },
-          { key: 'operator', label: 'Operator Sekolah', contohUser: 'admin_sekolah' }
+          { key: 'guru', label: 'Guru Pengampu', contohUser: 'guru.dewi' },
+          { key: 'kepsek', label: 'Kepala Sekolah', contohUser: 'kepsek.hendra' },
+          { key: 'operator', label: 'Operator Sekolah', contohUser: 'Cindy' }
         ].forEach((st) => { %>
           <div id="panel-<%= st.key %>" class="portal-panel <%= tab === st.key ? 'aktif' : '' %>">
             <h3 style="margin:0 0 8px; font-size:1.25rem; font-weight:800; color:var(--teks);">
@@ -264,7 +264,7 @@
               <input type="hidden" name="aksi" value="staf">
 
               <label for="username-<%= st.key %>">Username *</label>
-              <input type="text" id="username-<%= st.key %>" name="username" maxlength="50" value="<%= tab === st.key ? (postValues.username || '') : '' %>" placeholder="contoh: <%= st.contohUser %>" style="font-size:15px;" required>
+              <input type="text" id="username-<%= st.key %>" name="username" maxlength="50" value="<%= tab === st.key ? (postValues.username || '') : '' %>" placeholder="<%= isMysql ? 'Masukkan username...' : 'contoh: ' + st.contohUser %>" style="font-size:15px;" required>
 
               <label for="sandi-<%= st.key %>" style="margin-top:10px;">Kata Sandi *</label>
               <input type="password" id="sandi-<%= st.key %>" name="sandi" placeholder="Masukkan kata sandi..." style="font-size:15px;" required>
@@ -280,17 +280,19 @@
               </button>
             </form>
 
-            <div style="margin-top:14px; background:#FFFBEB; border:2px solid #FDE68A; border-radius:12px; padding:10px; font-size:13px;">
-              <div style="font-weight:800; color:#B45309; margin-bottom:4px;">💡 Akun Contoh <%= st.label %>:</div>
-              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                <div style="color:#334155;">
-                  <code><%= st.contohUser %></code> / <code>password123</code>
+            <% if (!isMysql) { %>
+              <div style="margin-top:14px; background:#FFFBEB; border:2px solid #FDE68A; border-radius:12px; padding:10px; font-size:13px;">
+                <div style="font-weight:800; color:#B45309; margin-bottom:4px;">💡 Akun Preview Sementara <%= st.label %>:</div>
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+                  <div style="color:#334155;">
+                    <code><%= st.contohUser %></code> / <code>password123</code>
+                  </div>
+                  <button type="button" class="btn-staf btn-staf-netral" style="padding:4px 8px; font-size:12px;" onclick="isiOtomatisStaf('<%= st.key %>', '<%= st.contohUser %>', 'password123')">
+                    ⚡ Isi Otomatis
+                  </button>
                 </div>
-                <button type="button" class="btn-staf btn-staf-netral" style="padding:4px 8px; font-size:12px;" onclick="isiOtomatisStaf('<%= st.key %>', '<%= st.contohUser %>', 'password123')">
-                  ⚡ Isi Otomatis
-                </button>
               </div>
-            </div>
+            <% } %>
           </div>
         <% }) %>
       </div>

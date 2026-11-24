@@ -3,7 +3,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import bcrypt from 'bcryptjs';
 import { config } from './config.js';
-import { db } from './store.js';
+import { findStaffByUsername } from './db.js';
+
+export function asyncHandler(fn) {
+  return (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
+}
 
 export function url(p = '') {
   return '/' + String(p).replace(/^\/+/, '');
@@ -16,10 +20,12 @@ export function gambarUrl(g) {
 
 export function hapusBerkasGambar(g) {
   const s = String(g || '');
-  if (!s || s.startsWith('contoh/') || s.includes('/') || s.includes('..')) return;
-  const f = path.join(process.cwd(), 'uploads', 'soal', s);
-  if (fs.existsSync(f)) {
-    try { fs.unlinkSync(f); } catch {}
+  if (!s || s.startsWith('contoh/') || s.includes('/') || s.includes('\\') || s.includes('..')) return;
+  const uploadDir = path.resolve(process.cwd(), 'uploads', 'soal');
+  const resolved = path.resolve(uploadDir, s);
+  if (!resolved.startsWith(uploadDir + path.sep)) return;
+  if (fs.existsSync(resolved)) {
+    try { fs.unlinkSync(resolved); } catch {}
   }
 }
 
@@ -198,23 +204,19 @@ export function resetGagal(req) {
   delete req.session.gagal_t;
 }
 
-export function loginStaf(req, username, sandi, hanya = null) {
+export async function loginStaf(req, username, sandi, hanya = null) {
   if (terlaluBanyakPercobaan(req)) {
     return 'Terlalu banyak percobaan. Tunggu 30 detik lalu coba lagi.';
   }
-  const tabel = [
-    ['guru', 'guru', 'id_guru'],
-    ['kepsek', 'kepsek', 'id_kepsek'],
-    ['operator', 'operator', 'id_operator'],
-  ];
-  for (const [role, key, pk] of tabel) {
+  const roles = ['guru', 'kepsek', 'operator'];
+  for (const role of roles) {
     if (hanya !== null && role !== hanya) continue;
-    const row = db[key].find((r) => r.username === username);
+    const row = await findStaffByUsername(role, username);
     if (row && bcrypt.compareSync(sandi, row.password)) {
       resetGagal(req);
       req.session.user = {
         role,
-        id: Number(row[pk]),
+        id: Number(row.id),
         nama: row.nama,
         username: row.username,
       };

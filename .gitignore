@@ -4,3 +4,5 @@ uploads/soal/*
 !uploads/soal/.gitkeep
 *.log
 .DS_Store
+.env
+node_modules/
